@@ -1,5 +1,6 @@
 package com.example.quiz;
 
+
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -12,13 +13,17 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.InputStream;
+import java.io.IOException;
+
 public class MainActivity extends AppCompatActivity {
 
     private TextView storyTextView;
     private LinearLayout choicesContainer;
 
-    private int currentSceneId = 1;  // Начинаем с первой сцены
+    private int currentSceneId = 1;
     private JSONObject storyData;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,14 +33,29 @@ public class MainActivity extends AppCompatActivity {
         storyTextView = findViewById(R.id.storyTextView);
         choicesContainer = findViewById(R.id.choicesContainer);
 
-        // Загрузка данных из story.json
-        String storyJson = getStoryJson();  // Для теста создадим строку JSON
+
         try {
-            storyData = new JSONObject(storyJson);
-            loadScene(currentSceneId);  // Загружаем первую сцену
+            storyData = new JSONObject(loadJSONFromAsset());
+            loadScene(currentSceneId);
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    private String loadJSONFromAsset() {
+        String json = null;
+        try {
+            InputStream is = getAssets().open("story.json");
+            int size = is.available();
+            byte[] buffer = new byte[size];
+            is.read(buffer);
+            is.close();
+            json = new String(buffer, "UTF-8");
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+        return json;
     }
 
     private void loadScene(int sceneId) throws JSONException {
@@ -72,47 +92,11 @@ public class MainActivity extends AppCompatActivity {
                             }
                         });
 
-                        choicesContainer.addView(choiceButton);  // Добавляем кнопку выбора
+                        choicesContainer.addView(choiceButton);
                     }
                 }
                 break;
             }
         }
-    }
-
-    private String getStoryJson() {
-        return "{\n" +
-                "  \"scenes\": [\n" +
-                "    {\n" +
-                "      \"id\": 1,\n" +
-                "      \"text\": \"\"Ты просыпаешься на жесткой койке в заброшенной клинике и слышишь странный шум, тебе кажется, что возможно, кто-то в соседней комнате. В воздухе чувствуется запах гнили, а свет в коридоре мигает.\"\",\n" +
-                "      \"choices\": [\n" +
-                "        {\n" +
-                "          \"text\": \"Осмотреть комнату\",\n" +
-                "          \"nextScene\": 2\n" +
-                "        },\n" +
-                "        {\n" +
-                "          \"text\": \"Попробовать открыть дверь и выйти\",\n" +
-                "          \"nextScene\": 3\n" +
-                "        }\n" +
-                "      ]\n" +
-                "    },\n" +
-                "    {\n" +
-                "      \"id\": 2,\n" +
-                "      \"text\": \"Ты находишь ключ от двери и одну из записок...\",\n" +
-                "      \"choices\": []\n" +
-                "    },\n" +
-                "    {\n" +
-                "      \"id\": 3,\n" +
-                "      \"text\": \"Ты выходишь в коридор и видишь пациента...\",\n" +
-                "      \"choices\": [\n" +
-                "        {\n" +
-                "          \"text\": \"Подойти и поговорить с ним\",\n" +
-                "          \"nextScene\": 4\n" +
-                "        }\n" +
-                "      ]\n" +
-                "    }\n" +
-                "  ]\n" +
-                "}";
     }
 }
