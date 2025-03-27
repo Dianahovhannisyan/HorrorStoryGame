@@ -65,12 +65,9 @@ public class MainActivity extends AppCompatActivity {
             JSONObject scene = scenes.getJSONObject(i);
 
             if (scene.getInt("id") == sceneId) {
-                // Отображаем текст сцены
                 String sceneText = scene.getString("text");
                 storyTextView.setText(sceneText);
 
-                // Отображаем кнопки для выбора
-                choicesContainer.removeAllViews();  // Очищаем предыдущие кнопки
                 if (scene.has("choices")) {
                     JSONArray choices = scene.getJSONArray("choices");
                     for (int j = 0; j < choices.length(); j++) {
@@ -83,7 +80,6 @@ public class MainActivity extends AppCompatActivity {
                             @Override
                             public void onClick(View v) {
                                 try {
-                                    // Переход к следующей сцене
                                     int nextSceneId = choice.getInt("nextScene");
                                     loadScene(nextSceneId);
                                 } catch (JSONException e) {

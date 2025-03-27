@@ -3,7 +3,6 @@
     android:layout_height="match_parent"
     android:padding="16dp">
 
-    <!-- TextView для отображения текста сцены -->
     <TextView
         android:id="@+id/storyTextView"
         android:layout_width="wrap_content"
@@ -13,7 +12,6 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"/>
 
-    <!-- Buttons для вариантов выбора -->
     <LinearLayout
         android:id="@+id/choicesContainer"
         android:layout_width="match_parent"
