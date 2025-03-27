@@ -1,27 +1,25 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:padding="16dp">
 
-    <TextView
-        android:id="@+id/titleTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="24sp"
-        android:textStyle="bold"/>
-
+    <!-- TextView для отображения текста сцены -->
     <TextView
         android:id="@+id/storyTextView"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Welcome to the game!"
         android:textSize="18sp"
-        android:layout_marginTop="10dp"/>
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"/>
 
+    <!-- Buttons для вариантов выбора -->
     <LinearLayout
-        android:id="@+id/choicesLayout"
+        android:id="@+id/choicesContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginTop="20dp"/>
-</LinearLayout>
+        android:layout_below="@id/storyTextView"
+        android:layout_marginTop="30dp"/>
+
+</RelativeLayout>
