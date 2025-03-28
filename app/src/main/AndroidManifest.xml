@@ -13,6 +13,9 @@
         android:theme="@style/Theme.Quiz"
         tools:targetApi="31">
         <activity
+            android:name=".GameActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.main.LoginActivity"
             android:exported="false" />
         <activity
@@ -27,8 +30,6 @@
         <activity
             android:name=".MainActivity"
             android:exported="true">
-
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@drawable/hospital">
+
+    <!-- Заголовок сцены -->
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Заголовок"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:padding="8dp"/>
+
+    <!-- Текст сцены -->
+    <TextView
+        android:id="@+id/tvText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Текст сцены..."
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        android:padding="8dp"/>
+
+    <!-- Кнопки выбора -->
+    <Button
+        android:id="@+id/btnChoice1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Выбор 1"
+        android:layout_marginTop="16dp"/>
+
+    <Button
+        android:id="@+id/btnChoice2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Выбор 2"
+        android:layout_marginTop="8dp"/>
+
+    <Button
+        android:id="@+id/btnChoice3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Выбор 3"
+        android:layout_marginTop="8dp"/>
+
+</LinearLayout>
