@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.google.gms.google.services)
 }
 
+
 android {
     namespace = "com.example.quiz"
     compileSdk = 35
@@ -34,22 +35,22 @@ android {
 }
 
 dependencies {
-
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
     implementation(libs.constraintlayout)
-    implementation(libs.firebase.database)
+
+    implementation(platform("com.google.firebase:firebase-bom:33.11.0")) // Firebase BOM
+    implementation("com.google.firebase:firebase-auth-ktx") // Firebase Authentication
+    implementation("com.google.firebase:firebase-database-ktx") // Firebase Realtime Database
+    implementation("com.google.android.gms:play-services-auth:21.3.0") // Google Sign-In (если нужен)
+
     implementation(libs.lifecycle.livedata.ktx)
     implementation(libs.lifecycle.viewmodel.ktx)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
-    implementation("com.google.code.gson:gson:2.8.8")
-    implementation(platform("com.google.firebase:firebase-bom:32.7.0")) // Проверьте актуальную версию BOM
-    implementation("com.google.firebase:firebase-auth-ktx") // Firebase Authentication
-    implementation("com.google.android.gms:play-services-auth:20.7.0") // Google Sign-In (если нужен)
 
-
-
+    implementation("com.google.code.gson:gson:2.10.1")
 }
