@@ -1,6 +1,7 @@
 package com.example.quiz.ui.main;
 
 
+
 public class Choice {
     private String text;
     private String nextText;
@@ -30,4 +31,3 @@ public class Choice {
         return nextScene;
     }
 }
-

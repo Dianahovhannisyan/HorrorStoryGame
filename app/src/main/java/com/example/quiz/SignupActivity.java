@@ -21,7 +21,6 @@ public class SignupActivity extends AppCompatActivity {
     TextView loginRedirectText;
     Button signupButton;
 
-    // Firebase
     FirebaseDatabase database;
     DatabaseReference reference;
 

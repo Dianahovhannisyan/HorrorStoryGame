@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.quiz.ui.main.GameLogic;
+import com.example.quiz.ui.main.StoryScene;
 
 
 public class GameActivity extends AppCompatActivity {
@@ -32,25 +33,48 @@ public class GameActivity extends AppCompatActivity {
 
 
         gameLogic = new GameLogic(this);
+
         showCurrentScene();
 
 
-        btnChoice1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) { processChoice(0); }
-        });
-        btnChoice2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) { processChoice(1); }
-        });
-        btnChoice3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) { processChoice(2); }
-        });
+        btnChoice1.setOnClickListener(v -> processChoice(0));
+        btnChoice2.setOnClickListener(v -> processChoice(1));
+        btnChoice3.setOnClickListener(v -> processChoice(2));
+    }
+
+    private void showCurrentScene() {
+        StoryScene scene = gameLogic.getCurrentScene();
+        if (scene != null) {
+            tvTitle.setText(scene.getTitle());
+            tvText.setText(scene.getText());
+
+            int choiceCount = scene.getChoices().size();
+            if (choiceCount > 0) {
+                btnChoice1.setVisibility(View.VISIBLE);
+                btnChoice1.setText(scene.getChoices().get(0).getText());
+            } else {
+                btnChoice1.setVisibility(View.GONE);
+            }
+
+            if (choiceCount > 1) {
+                btnChoice2.setVisibility(View.VISIBLE);
+                btnChoice2.setText(scene.getChoices().get(1).getText());
+            } else {
+                btnChoice2.setVisibility(View.GONE);
+            }
+
+            if (choiceCount > 2) {
+                btnChoice3.setVisibility(View.VISIBLE);
+                btnChoice3.setText(scene.getChoices().get(2).getText());
+            } else {
+                btnChoice3.setVisibility(View.GONE);
+            }
+        } else {
+            showFinalResult();
+        }
     }
 
     private void processChoice(int choiceIndex) {
-        // Получаем результат выбора (текст последствий)
         String resultText = gameLogic.processChoice(choiceIndex);
 
         new AlertDialog.Builder(this)
@@ -65,34 +89,6 @@ public class GameActivity extends AppCompatActivity {
                     }
                 })
                 .show();
-    }
-
-    private void showCurrentScene() {
-        Scene scene = gameLogic.getCurrentScene();
-        if (scene != null) {
-            tvTitle.setText(scene.getTitle());
-            tvText.setText(scene.getText());
-
-            int choiceCount = scene.getChoices().size();
-            if (choiceCount > 0) {
-                btnChoice1.setVisibility(View.VISIBLE);
-                btnChoice1.setText(scene.getChoices().get(0).getText());
-            } else {
-                btnChoice1.setVisibility(View.GONE);
-            }
-            if (choiceCount > 1) {
-                btnChoice2.setVisibility(View.VISIBLE);
-                btnChoice2.setText(scene.getChoices().get(1).getText());
-            } else {
-                btnChoice2.setVisibility(View.GONE);
-            }
-            if (choiceCount > 2) {
-                btnChoice3.setVisibility(View.VISIBLE);
-                btnChoice3.setText(scene.getChoices().get(2).getText());
-            } else {
-                btnChoice3.setVisibility(View.GONE);
-            }
-        }
     }
 
     private void showFinalResult() {

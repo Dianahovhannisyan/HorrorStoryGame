@@ -3,13 +3,13 @@ package com.example.quiz.ui.main;
 
 import java.util.List;
 
-public class Scene {
+public class StoryScene {
     private String id;
     private String title;
     private String text;
     private List<Choice> choices;
 
-    public Scene(String id, String title, String text, List<Choice> choices) {
+    public StoryScene(String id, String title, String text, List<Choice> choices) {
         this.id = id;
         this.title = title;
         this.text = text;
@@ -32,4 +32,3 @@ public class Scene {
         return choices;
     }
 }
-

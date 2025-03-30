@@ -2,15 +2,18 @@ package com.example.quiz.ui.main;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.quiz.GameActivity;
 import com.example.quiz.MainActivity;
 import com.example.quiz.R;
 import com.example.quiz.SignupActivity;
@@ -45,6 +48,7 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 if (!validateUsername() | !validatePassword()) {
 
                     return;
@@ -63,9 +67,7 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    /**
-     * Проверяем, что поле username не пустое
-     */
+
     public Boolean validateUsername() {
         String val = loginUsername.getText().toString();
         if (val.isEmpty()) {
@@ -77,9 +79,7 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    /**
-     * Проверяем, что поле password не пустое
-     */
+
     public Boolean validatePassword() {
         String val = loginPassword.getText().toString();
         if (val.isEmpty()) {
@@ -91,9 +91,7 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    /**
-     * Проверка пользователя в Firebase по username и сверка пароля
-     */
+
     public void checkUser() {
         String userUsername = loginUsername.getText().toString().trim();
         String userPassword = loginPassword.getText().toString().trim();
@@ -111,7 +109,7 @@ public class LoginActivity extends AppCompatActivity {
                     String passwordFromDB = snapshot.child(userUsername).child("password").getValue(String.class);
 
                     if (Objects.equals(passwordFromDB, userPassword)) {
-                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                        Intent intent = new Intent(LoginActivity.this, GameActivity.class);
                         startActivity(intent);
                     } else {
                         loginPassword.setError("Invalid Credentials");
