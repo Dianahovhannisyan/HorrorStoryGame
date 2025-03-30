@@ -98,15 +98,11 @@ public class LoginActivity extends AppCompatActivity {
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
 
-        Query checkUserDatabase = reference.orderByChild("username").equalTo(userUsername);
-
-        checkUserDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+        reference.child(userUsername).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
-                    loginUsername.setError(null);
-
-                    String passwordFromDB = snapshot.child(userUsername).child("password").getValue(String.class);
+                    String passwordFromDB = snapshot.child("password").getValue(String.class);
 
                     if (Objects.equals(passwordFromDB, userPassword)) {
                         Intent intent = new Intent(LoginActivity.this, GameActivity.class);
@@ -123,7 +119,9 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
+                System.out.println("try again");
             }
         });
     }
+
 }

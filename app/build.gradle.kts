@@ -46,5 +46,10 @@ dependencies {
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
     implementation("com.google.code.gson:gson:2.8.8")
+    implementation(platform("com.google.firebase:firebase-bom:32.7.0")) // Проверьте актуальную версию BOM
+    implementation("com.google.firebase:firebase-auth-ktx") // Firebase Authentication
+    implementation("com.google.android.gms:play-services-auth:20.7.0") // Google Sign-In (если нужен)
+
+
 
 }
