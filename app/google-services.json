@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "783228161718",
+    "firebase_url": "https://horrorquizgame-default-rtdb.firebaseio.com",
+    "project_id": "horrorquizgame",
+    "storage_bucket": "horrorquizgame.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:783228161718:android:34b375186d9710e75f6017",
+        "android_client_info": {
+          "package_name": "com.example.quiz"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDPtbmoy3IU1JHaSPHc1Z0YnEFbBBEF0-0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
