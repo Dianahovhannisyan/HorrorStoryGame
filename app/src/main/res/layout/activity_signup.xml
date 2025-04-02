@@ -19,6 +19,7 @@
         app:cardBackgroundColor="@color/white">
 
         <LinearLayout
+            android:background="#1B1B1B"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -31,7 +32,7 @@
                 android:textAlignment="center"
                 android:textSize="25sp"
                 android:textStyle="italic"
-                android:textColor="@color/black" />
+                android:textColor="@color/white" />
 
             <EditText
                 android:id="@+id/signup_name"
@@ -42,8 +43,9 @@
                 android:drawableStart="@drawable/baseline_3p_24"
                 android:drawablePadding="8dp"
                 android:hint="Name"
+                android:textColorHint="#F3F3F3"
                 android:padding="8dp"
-                android:textColor="@color/black"
+                android:textColor="#FFFFFF"
                 android:minHeight="48dp"/>
 
             <EditText
@@ -55,8 +57,9 @@
                 android:drawableStart="@drawable/baseline_attach_email_24"
                 android:drawablePadding="8dp"
                 android:hint="Email"
+                android:textColorHint="#F3F3F3"
                 android:padding="8dp"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:minHeight="48dp"/>
 
             <EditText
@@ -68,8 +71,9 @@
                 android:drawableStart="@drawable/baseline_account_circle_24"
                 android:drawablePadding="8dp"
                 android:hint="Username"
+                android:textColorHint="#F3F3F3"
                 android:padding="8dp"
-                android:textColor="@color/black"
+                android:textColor="#FFFFFF"
                 android:minHeight="48dp"/>
 
             <EditText
@@ -80,16 +84,19 @@
                 android:background="@drawable/lavander_border"
                 android:drawablePadding="8dp"
                 android:hint="Password"
+                android:textColorHint="#F3F3F3"
                 android:inputType="textPassword"
                 android:drawableStart="@drawable/baseline_lock_24"
                 android:padding="8dp"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:minHeight="48dp"/>
             
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:text="Sign up"
+                android:backgroundTint="#433764"
+                android:textColor="@color/white"
                 android:id="@+id/signup_button"
                 android:textSize="18sp"
                 android:layout_marginTop="30dp"

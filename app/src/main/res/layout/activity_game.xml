@@ -1,50 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/hospital"
     android:orientation="vertical"
-    android:padding="16dp"
-    android:background="@drawable/hospital">
+    android:padding="16dp">
 
     <TextView
         android:id="@+id/tvTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="10dp"
         android:text="Заголовок"
+        android:textColor="@color/white"
         android:textSize="24sp"
-        android:textStyle="bold"
-        android:textColor="@color/black"
-        android:padding="8dp"/>
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/tvText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="8dp"
         android:text="Текст сцены..."
-        android:textSize="18sp"
-        android:textColor="@color/black"
-        android:padding="8dp"/>
+        android:textColor="@color/white"
+        android:textSize="18sp" />
 
     <Button
         android:id="@+id/btnChoice1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:text="Выбор 1"
-        android:layout_marginTop="16dp"/>
+        android:backgroundTint="#433764"
+        android:textColor="#EDF8ED"
+        />
 
     <Button
         android:id="@+id/btnChoice2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:text="Выбор 2"
-        android:layout_marginTop="8dp"/>
+        android:backgroundTint="#433764"
+        android:textColor="#EDF8ED"/>
 
     <Button
         android:id="@+id/btnChoice3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:text="Выбор 3"
-        android:layout_marginTop="8dp"/>
+        android:backgroundTint="#433764"
+        android:textColor="#EDF8ED"/>
 
 </LinearLayout>

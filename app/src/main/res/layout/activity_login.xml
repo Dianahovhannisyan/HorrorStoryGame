@@ -22,6 +22,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="#1B1B1B"
             android:orientation="vertical"
             android:padding="20dp">
 
@@ -32,7 +33,7 @@
                 android:textAlignment="center"
                 android:textSize="25sp"
                 android:textStyle="italic"
-                android:textColor="@color/black" />
+                android:textColor="@color/white" />
 
 
 
@@ -45,8 +46,9 @@
                 android:drawableStart="@drawable/baseline_account_circle_24"
                 android:drawablePadding="8dp"
                 android:hint="Username"
+                android:textColorHint="@color/white"
                 android:padding="8dp"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:minHeight="48dp"/>
 
             <EditText
@@ -58,9 +60,10 @@
                 android:drawablePadding="8dp"
                 android:hint="Password"
                 android:inputType="textPassword"
+                android:textColorHint="@color/white"
                 android:drawableStart="@drawable/baseline_lock_24"
                 android:padding="8dp"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:minHeight="48dp"/>
 
             <Button
@@ -68,7 +71,9 @@
                 android:layout_height="60dp"
                 android:text="Login"
                 android:id="@+id/login_button"
-                android:textSize="18sp"
+                android:backgroundTint="#433764"
+                android:textColor="@color/white"
+                android:textSize="20sp"
                 android:layout_marginTop="30dp"
                 app:cornerRadius = "20dp"/>
 
