@@ -1,101 +1,91 @@
 package com.example.quiz.ui.main;
 
+import android.content.Context;
+import java.util.ArrayList;
+import java.util.List;
+
 
 import android.content.Context;
-
+import android.content.res.AssetManager;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.InputStream;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class GameLogic {
-
-    private Map<String, StoryScene> sceneMap;
-    private String currentSceneId;
-    private int score;
+    private List<StoryScene> scenes;
+    private int currentSceneId;
 
     public GameLogic(Context context) {
-        score = 0;
-        loadScenesFromJSON(context);
-        currentSceneId = "1";
+        scenes = new ArrayList<>();
+        loadScenesFromJson(context);
+        currentSceneId = 1; // Начинаем с первой сцены
     }
 
-
-    public StoryScene getCurrentScene() {
-        return sceneMap.get(currentSceneId);
-    }
-
-
-    public String processChoice(int choiceIndex) {
-        StoryScene currentScene = sceneMap.get(currentSceneId);
-        if (currentScene == null || choiceIndex >= currentScene.getChoices().size()) {
-            return "";
-        }
-
-        Choice choice = currentScene.getChoices().get(choiceIndex);
-
-        score += choice.getPoints();
-
-        String resultText = choice.getNextText();
-
-        currentSceneId = choice.getNextScene();
-
-        return resultText;
-    }
-
-    public int getScore() {
-        return score;
-    }
-
-
-    public boolean hasNextScene() {
-        return sceneMap.containsKey(currentSceneId);
-    }
-
-    private void loadScenesFromJSON(Context context) {
-        sceneMap = new HashMap<>();
+    private void loadScenesFromJson(Context context) {
+        String jsonString = loadJSONFromAsset(context, "story.json");
+        if (jsonString == null) return;
         try {
-            InputStream is = context.getAssets().open("story.json");
-            int size = is.available();
-            byte[] buffer = new byte[size];
-            is.read(buffer);
-            is.close();
-
-            String jsonStr = new String(buffer, "UTF-8");
-            JSONObject jsonObj = new JSONObject(jsonStr);
-            JSONArray scenesArray = jsonObj.getJSONArray("scenes");
-
+            JSONObject jsonObject = new JSONObject(jsonString);
+            JSONArray scenesArray = jsonObject.getJSONArray("scenes");
             for (int i = 0; i < scenesArray.length(); i++) {
                 JSONObject sceneObj = scenesArray.getJSONObject(i);
-                String id = sceneObj.getString("id");
-                String title = sceneObj.getString("title");
+                int id = sceneObj.getInt("id");
+                String title = sceneObj.has("title") ? sceneObj.getString("title") : "";
                 String text = sceneObj.getString("text");
 
                 List<Choice> choices = new ArrayList<>();
-                JSONArray choicesArray = sceneObj.getJSONArray("choices");
-                for (int j = 0; j < choicesArray.length(); j++) {
-                    JSONObject choiceObj = choicesArray.getJSONObject(j);
-                    String choiceText = choiceObj.getString("text");
-                    String nextText = choiceObj.getString("nextText");
-                    int points = choiceObj.getInt("points");
-                    String nextScene = choiceObj.getString("nextScene");
-
-                    Choice choice = new Choice(choiceText, nextText, points, nextScene);
-                    choices.add(choice);
+                if (sceneObj.has("choices")) {
+                    JSONArray choicesArray = sceneObj.getJSONArray("choices");
+                    for (int j = 0; j < choicesArray.length(); j++) {
+                        JSONObject choiceObj = choicesArray.getJSONObject(j);
+                        String choiceText = choiceObj.getString("text");
+                        int nextScene = choiceObj.getInt("nextScene");
+                        choices.add(new Choice(choiceText, nextScene));
+                    }
                 }
-
-                StoryScene storyScene = new StoryScene(id, title, text, choices);
-                sceneMap.put(id, storyScene);
+                scenes.add(new StoryScene(id, title, text, choices));
             }
-
-        } catch (IOException | JSONException e) {
+        } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    private String loadJSONFromAsset(Context context, String filename) {
+        String json = null;
+        try {
+            AssetManager assetManager = context.getAssets();
+            InputStream is = assetManager.open(filename);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+            StringBuilder sb = new StringBuilder();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                sb.append(line);
+            }
+            reader.close();
+            json = sb.toString();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        return json;
+    }
+
+    public StoryScene getCurrentScene() {
+        for (StoryScene scene : scenes) {
+            if (scene.getId() == currentSceneId) {
+                return scene;
+            }
+        }
+        return null;
+    }
+
+    public void goToNextScene(int sceneId) {
+        currentSceneId = sceneId;
     }
 }

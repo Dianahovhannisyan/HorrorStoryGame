@@ -4,14 +4,10 @@ package com.example.quiz.ui.main;
 
 public class Choice {
     private String text;
-    private String nextText;
-    private int points;
-    private String nextScene;
+    private int nextScene;
 
-    public Choice(String text, String nextText, int points, String nextScene) {
+    public Choice(String text, int nextScene) { // Изменили String на int
         this.text = text;
-        this.nextText = nextText;
-        this.points = points;
         this.nextScene = nextScene;
     }
 
@@ -19,15 +15,7 @@ public class Choice {
         return text;
     }
 
-    public String getNextText() {
-        return nextText;
-    }
-
-    public int getPoints() {
-        return points;
-    }
-
-    public String getNextScene() {
+    public int getNextScene() { // Теперь возвращает int
         return nextScene;
     }
 }

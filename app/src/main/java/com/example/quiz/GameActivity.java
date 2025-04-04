@@ -1,21 +1,21 @@
 package com.example.quiz;
 
-
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.content.Intent;
 import android.os.Bundle;
-import android.transition.Scene;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.quiz.R;
+import com.example.quiz.ui.main.Choice;
 import com.example.quiz.ui.main.GameLogic;
 import com.example.quiz.ui.main.StoryScene;
 
+import java.util.List;
+
 
 public class GameActivity extends AppCompatActivity {
-
     private TextView tvTitle, tvText;
     private Button btnChoice1, btnChoice2, btnChoice3;
     private GameLogic gameLogic;
@@ -31,83 +31,45 @@ public class GameActivity extends AppCompatActivity {
         btnChoice2 = findViewById(R.id.btnChoice2);
         btnChoice3 = findViewById(R.id.btnChoice3);
 
-
         gameLogic = new GameLogic(this);
-
-        showCurrentScene();
-
-
-        btnChoice1.setOnClickListener(v -> processChoice(0));
-        btnChoice2.setOnClickListener(v -> processChoice(1));
-        btnChoice3.setOnClickListener(v -> processChoice(2));
+        updateScene();
     }
 
-    private void showCurrentScene() {
+    private void updateScene() {
         StoryScene scene = gameLogic.getCurrentScene();
-        if (scene != null) {
-            tvTitle.setText(scene.getTitle());
-            tvText.setText(scene.getText());
+        if (scene == null) return;
 
-            int choiceCount = scene.getChoices().size();
-            if (choiceCount > 0) {
-                btnChoice1.setVisibility(View.VISIBLE);
-                btnChoice1.setText(scene.getChoices().get(0).getText());
-            } else {
-                btnChoice1.setVisibility(View.GONE);
-            }
+        tvTitle.setText(scene.getTitle());
+        tvText.setText(scene.getText());
 
-            if (choiceCount > 1) {
-                btnChoice2.setVisibility(View.VISIBLE);
-                btnChoice2.setText(scene.getChoices().get(1).getText());
-            } else {
-                btnChoice2.setVisibility(View.GONE);
-            }
-
-            if (choiceCount > 2) {
-                btnChoice3.setVisibility(View.VISIBLE);
-                btnChoice3.setText(scene.getChoices().get(2).getText());
-            } else {
-                btnChoice3.setVisibility(View.GONE);
-            }
+        List<Choice> choices = scene.getChoices();
+        if (choices.size() > 0) {
+            btnChoice1.setText(choices.get(0).getText());
+            btnChoice1.setVisibility(View.VISIBLE);
+            btnChoice1.setOnClickListener(v -> goToScene(choices.get(0).getNextScene()));
         } else {
-            showFinalResult();
+            btnChoice1.setVisibility(View.GONE);
+        }
+
+        if (choices.size() > 1) {
+            btnChoice2.setText(choices.get(1).getText());
+            btnChoice2.setVisibility(View.VISIBLE);
+            btnChoice2.setOnClickListener(v -> goToScene(choices.get(1).getNextScene()));
+        } else {
+            btnChoice2.setVisibility(View.GONE);
+        }
+
+        if (choices.size() > 2) {
+            btnChoice3.setText(choices.get(2).getText());
+            btnChoice3.setVisibility(View.VISIBLE);
+            btnChoice3.setOnClickListener(v -> goToScene(choices.get(2).getNextScene()));
+        } else {
+            btnChoice3.setVisibility(View.GONE);
         }
     }
 
-    private void processChoice(int choiceIndex) {
-        String resultText = gameLogic.processChoice(choiceIndex);
-
-        new AlertDialog.Builder(this)
-                .setTitle("Результат выбора")
-                .setMessage(resultText)
-                .setCancelable(false)
-                .setPositiveButton("Продолжить", (dialog, which) -> {
-                    if (gameLogic.hasNextScene()) {
-                        showCurrentScene();
-                    } else {
-                        showFinalResult();
-                    }
-                })
-                .show();
-    }
-
-    private void showFinalResult() {
-        int score = gameLogic.getScore();
-        String ending;
-        if (score >= 90) {
-            ending = "Выживший героически";
-        } else if (score >= 60) {
-            ending = "Выжил, но не без потерь";
-        } else if (score >= 30) {
-            ending = "Неполное выживание";
-        } else {
-            ending = "Неудачник";
-        }
-        new AlertDialog.Builder(this)
-                .setTitle("Конец игры")
-                .setMessage("Ваш итоговый счет: " + score + "\n" + ending)
-                .setCancelable(false)
-                .setPositiveButton("OK", (dialog, which) -> finish())
-                .show();
+    private void goToScene(int sceneId) {
+        gameLogic.goToNextScene(sceneId);
+        updateScene();
     }
 }

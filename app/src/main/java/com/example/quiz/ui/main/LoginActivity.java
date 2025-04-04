@@ -4,12 +4,12 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
+import com.example.quiz.GameActivity;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.example.quiz.GameActivity;
+
 import com.example.quiz.R;
 import com.example.quiz.SignupActivity;
 import com.google.firebase.auth.FirebaseAuth;
@@ -92,7 +92,7 @@ public class LoginActivity extends AppCompatActivity {
                                     .addOnCompleteListener(task -> {
                                         if (task.isSuccessful()) {
                                             Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
-                                            Intent intent = new Intent(LoginActivity.this, GameActivity.class);
+                                            Intent intent = new Intent(LoginActivity.this, com.example.quiz.GameActivity.class);
                                             intent.putExtra("username", userUsername);
                                             intent.putExtra("email", emailFromDB);
                                             startActivity(intent);
