@@ -7,18 +7,19 @@ import android.widget.Button;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.quiz.R;
 import com.example.quiz.ui.main.Choice;
 import com.example.quiz.ui.main.GameLogic;
 import com.example.quiz.ui.main.StoryScene;
 
 import java.util.List;
 
-
 public class GameActivity extends AppCompatActivity {
+
     private TextView tvTitle, tvText;
     private Button btnChoice1, btnChoice2, btnChoice3;
+
     private GameLogic gameLogic;
+    private StoryScene currentScene;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,44 +33,40 @@ public class GameActivity extends AppCompatActivity {
         btnChoice3 = findViewById(R.id.btnChoice3);
 
         gameLogic = new GameLogic(this);
-        updateScene();
+        showScene("start");  // первая сцена
     }
 
-    private void updateScene() {
-        StoryScene scene = gameLogic.getCurrentScene();
-        if (scene == null) return;
+    private void showScene(String sceneId) {
+        currentScene = gameLogic.getScene(sceneId);
+        if (currentScene == null) return;
 
-        tvTitle.setText(scene.getTitle());
-        tvText.setText(scene.getText());
+        tvTitle.setText(currentScene.getTitle());
+        tvText.setText(currentScene.getText());
 
-        List<Choice> choices = scene.getChoices();
+        List<Choice> choices = currentScene.getChoices();
+
+        btnChoice1.setVisibility(View.GONE);
+        btnChoice2.setVisibility(View.GONE);
+        btnChoice3.setVisibility(View.GONE);
+
         if (choices.size() > 0) {
-            btnChoice1.setText(choices.get(0).getText());
             btnChoice1.setVisibility(View.VISIBLE);
-            btnChoice1.setOnClickListener(v -> goToScene(choices.get(0).getNextScene()));
-        } else {
-            btnChoice1.setVisibility(View.GONE);
+            btnChoice1.setText(choices.get(0).getText());
+            btnChoice1.setOnClickListener(v -> showScene(choices.get(0).getNextSceneId()));
         }
-
         if (choices.size() > 1) {
-            btnChoice2.setText(choices.get(1).getText());
             btnChoice2.setVisibility(View.VISIBLE);
-            btnChoice2.setOnClickListener(v -> goToScene(choices.get(1).getNextScene()));
-        } else {
-            btnChoice2.setVisibility(View.GONE);
+            btnChoice2.setText(choices.get(1).getText());
+            btnChoice2.setOnClickListener(v -> showScene(choices.get(1).getNextSceneId()));
         }
-
         if (choices.size() > 2) {
-            btnChoice3.setText(choices.get(2).getText());
             btnChoice3.setVisibility(View.VISIBLE);
-            btnChoice3.setOnClickListener(v -> goToScene(choices.get(2).getNextScene()));
-        } else {
-            btnChoice3.setVisibility(View.GONE);
+            btnChoice3.setText(choices.get(2).getText());
+            btnChoice3.setOnClickListener(v -> showScene(choices.get(2).getNextSceneId()));
         }
-    }
 
-    private void goToScene(int sceneId) {
-        gameLogic.goToNextScene(sceneId);
-        updateScene();
+        if (sceneId.equals("end_game")) {
+            finish(); // или: startActivity(new Intent(this, LoginActivity.class));
+        }
     }
 }

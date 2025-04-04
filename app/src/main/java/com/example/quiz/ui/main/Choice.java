@@ -4,18 +4,13 @@ package com.example.quiz.ui.main;
 
 public class Choice {
     private String text;
-    private int nextScene;
+    private String nextSceneId;
 
-    public Choice(String text, int nextScene) { // Изменили String на int
+    public Choice(String text, String nextSceneId) {
         this.text = text;
-        this.nextScene = nextScene;
+        this.nextSceneId = nextSceneId;
     }
 
-    public String getText() {
-        return text;
-    }
-
-    public int getNextScene() { // Теперь возвращает int
-        return nextScene;
-    }
+    public String getText() { return text; }
+    public String getNextSceneId() { return nextSceneId; }
 }
