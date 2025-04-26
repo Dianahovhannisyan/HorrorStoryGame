@@ -35,6 +35,13 @@ public class SignupActivity extends AppCompatActivity {
         signupButton = findViewById(R.id.signup_button);
 
         signupButton.setOnClickListener(v -> registerUser());
+
+        TextView loginRedirectText = findViewById(R.id.loginRedirectText);
+
+        loginRedirectText.setOnClickListener(view -> {
+            startActivity(new Intent(SignupActivity.this, LoginActivity.class));
+        });
+
     }
 
     private void registerUser() {
