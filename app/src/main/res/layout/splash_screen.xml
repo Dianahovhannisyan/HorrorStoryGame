@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@drawable/startwindow">
+
+    <TextView
+        android:id="@+id/back_titleText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:fontFamily="serif"
+        android:text="“No Turning Back”"
+        android:gravity="start"
+        android:textColor="#ffffff"
+        android:textSize="20sp"
+        android:textStyle="italic" />
+
+    <TextView
+        android:id="@+id/window_titleText1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="THE QUEST"
+        android:textSize="45sp"
+        android:textColor="#ffffff"
+        android:layout_marginBottom="0dp"
+        android:textStyle="bold"
+        android:fontFamily="serif"
+        />
+
+    <TextView
+        android:id="@+id/window_titleText2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="OF LEGENDS"
+        android:textSize="45sp"
+        android:textColor="#ffffff"
+        android:layout_marginBottom="50dp"
+        android:textStyle="bold"
+        android:fontFamily="serif"/>
+
+    <Button
+        android:id="@+id/startButton"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_button"
+        android:text="START GAME"
+        android:textColor="#F8F8F8"
+        android:textSize="18sp"
+        android:layout_marginBottom="20dp"/>
+
+
+    <Button
+        android:id="@+id/settingsButton"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_button"
+        android:text="SETTINGS"
+        android:textColor="#F8F8F8"
+        android:textSize="18sp"
+        android:layout_marginBottom="20dp"/>
+
+
+    <Button
+        android:id="@+id/rulesButton"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_button"
+        android:text="RULES"
+        android:textColor="#F8F8F8"
+        android:textSize="18sp"
+        android:layout_marginBottom="20dp"/>
+
+    <Button
+        android:id="@+id/exitButton"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_button"
+        android:text="EXIT"
+        android:textColor="#F8F8F8"
+        android:textSize="18sp"
+        android:layout_marginBottom="20dp"/>
+
+</LinearLayout>
