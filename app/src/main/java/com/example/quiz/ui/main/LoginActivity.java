@@ -58,7 +58,7 @@ public class LoginActivity extends AppCompatActivity {
                 FirebaseUser user = mAuth.getCurrentUser();
                 if (user != null && user.isEmailVerified()) {
                     Toast.makeText(LoginActivity.this, "Успешный вход", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(LoginActivity.this, GameActivity.class);
+                    Intent intent = new Intent(LoginActivity.this, StartWindowActivity.class);
                     intent.putExtra("email", user.getEmail());
                     startActivity(intent);
                     finish();

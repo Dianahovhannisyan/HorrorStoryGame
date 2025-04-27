@@ -48,6 +48,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/rounded_button"
         android:text="START GAME"
+        android:drawableLeft="@drawable/play"
         android:textColor="#F8F8F8"
         android:textSize="18sp"
         android:layout_marginBottom="20dp"/>
@@ -59,6 +60,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/rounded_button"
         android:text="SETTINGS"
+        android:drawableLeft="@drawable/settings"
         android:textColor="#F8F8F8"
         android:textSize="18sp"
         android:layout_marginBottom="20dp"/>
@@ -70,6 +72,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/rounded_button"
         android:text="RULES"
+        android:drawableLeft="@drawable/rules"
         android:textColor="#F8F8F8"
         android:textSize="18sp"
         android:layout_marginBottom="20dp"/>
@@ -80,6 +83,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/rounded_button"
         android:text="EXIT"
+        android:drawableLeft="@drawable/exit"
         android:textColor="#F8F8F8"
         android:textSize="18sp"
         android:layout_marginBottom="20dp"/>

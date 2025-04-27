@@ -13,6 +13,15 @@
         android:theme="@style/Theme.Quiz"
         tools:targetApi="31">
         <activity
+            android:name=".ui.main.SettingsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.main.StartWindowActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.main.RulesActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.main.StoryActivity"
             android:exported="false" />
         <activity
