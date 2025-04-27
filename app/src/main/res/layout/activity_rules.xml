@@ -36,8 +36,9 @@
                 android:fontFamily="serif"/>
         </LinearLayout>
 
-        <!-- Правила -->
+
         <TextView
+            android:id="@+id/rule1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="1. Выбирай мудро:"
@@ -47,6 +48,7 @@
             android:layout_marginBottom="8dp"/>
 
         <TextView
+            android:id="@+id/under_rule1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Каждое твое решение влияет на дальнейший ход событий и на финал истории."
@@ -55,6 +57,7 @@
             android:layout_marginBottom="16dp"/>
 
         <TextView
+            android:id="@+id/rule2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="2. Один выбор — один шанс:"
@@ -72,6 +75,7 @@
             android:layout_marginBottom="16dp"/>
 
         <TextView
+            android:id="@+id/rule3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="3. Исследуй внимательно:"
@@ -89,6 +93,7 @@
             android:layout_marginBottom="16dp"/>
 
         <TextView
+            android:id="@+id/rule4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="4. Уважай атмосферу:"
@@ -106,6 +111,7 @@
             android:layout_marginBottom="16dp"/>
 
         <TextView
+            android:id="@+id/rule5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="5. Несколько концовок:"
@@ -115,6 +121,7 @@
             android:layout_marginBottom="8dp"/>
 
         <TextView
+            android:id="@+id/warning"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Твоя история может закончиться счастливо... или трагически. Всё зависит только от тебя."
