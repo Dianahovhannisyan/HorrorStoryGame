@@ -31,14 +31,14 @@ public class StartWindowActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start_window);
 
-        back_titleText = findViewById(R.id.back_titleText);
+        back_titleText = findViewById(R.id.windowback_titleText);
         window_titleText1 = findViewById(R.id.window_titleText1);
         window_titleText2 = findViewById(R.id.window_titleText2);
 
-        startButton = findViewById(R.id.startButton);
-        settingsButton = findViewById(R.id.settingsButton);
-        rulesButton = findViewById(R.id.rulesButton);
-        exitButton = findViewById(R.id.exitButton);
+        startButton = findViewById(R.id.windowstartButton);
+        settingsButton = findViewById(R.id.windowsettingsButton);
+        rulesButton = findViewById(R.id.windowrulesButton);
+        exitButton = findViewById(R.id.windowexitButton);
 
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override

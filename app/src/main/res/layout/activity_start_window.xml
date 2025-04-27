@@ -8,7 +8,7 @@
     android:background="@drawable/startwindow">
 
     <TextView
-        android:id="@+id/back_titleText"
+        android:id="@+id/windowback_titleText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="30dp"
@@ -43,7 +43,7 @@
         android:fontFamily="serif"/>
 
     <Button
-        android:id="@+id/startButton"
+        android:id="@+id/windowstartButton"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:background="@drawable/rounded_button"
@@ -55,7 +55,7 @@
 
 
     <Button
-        android:id="@+id/settingsButton"
+        android:id="@+id/windowsettingsButton"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:background="@drawable/rounded_button"
@@ -67,7 +67,7 @@
 
 
     <Button
-        android:id="@+id/rulesButton"
+        android:id="@+id/windowrulesButton"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:background="@drawable/rounded_button"
@@ -78,7 +78,7 @@
         android:layout_marginBottom="20dp"/>
 
     <Button
-        android:id="@+id/exitButton"
+        android:id="@+id/windowexitButton"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:background="@drawable/rounded_button"

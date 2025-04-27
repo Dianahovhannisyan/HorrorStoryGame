@@ -1,10 +1,145 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.main.RulesActivity">
+    android:background="@drawable/rulesactivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:layout_marginBottom="32dp">
+
+            <ImageView
+                android:id="@+id/rulesicon"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/rulesicon"
+                android:layout_marginEnd="8dp"/>
+
+            <TextView
+                android:id="@+id/rules_titleText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ПРАВИЛА ИГРЫ"
+                android:textColor="#FFFFFF"
+                android:textSize="32sp"
+                android:textStyle="bold"
+                android:fontFamily="serif"/>
+        </LinearLayout>
+
+        <!-- Правила -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1. Выбирай мудро:"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Каждое твое решение влияет на дальнейший ход событий и на финал истории."
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:layout_marginBottom="16dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2. Один выбор — один шанс:"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="После выбора нельзя вернуться назад. Подумай прежде, чем сделать шаг."
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:layout_marginBottom="16dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="3. Исследуй внимательно:"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Читай текст внимательно. Подсказки спрятаны в описаниях."
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:layout_marginBottom="16dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="4. Уважай атмосферу:"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Для полного погружения используй наушники и играй в тишине."
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:layout_marginBottom="16dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="5. Несколько концовок:"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Твоя история может закончиться счастливо... или трагически. Всё зависит только от тебя."
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:layout_marginBottom="32dp"/>
+
+        <ImageView
+            android:id="@+id/swordsIcon"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/swordicon"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="16dp"/>
+
+        <TextView
+            android:id="@+id/ready_play"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Готов начать своё приключение?\nТогда вперёд!"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:textStyle="italic"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"/>
+
+    </LinearLayout>
+</ScrollView>
