@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:background="@drawable/hospital"
+    android:background="@drawable/startwindow"
     tools:context=".SignupActivity">
 
     <androidx.cardview.widget.CardView
@@ -19,7 +19,7 @@
         app:cardBackgroundColor="@color/white">
 
         <LinearLayout
-            android:background="#1B1B1B"
+            android:background="#111C18"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -31,7 +31,7 @@
                 android:fontFamily="serif"
                 android:text="Sign up"
                 android:textAlignment="center"
-                android:textSize="25sp"
+                android:textSize="30sp"
                 android:textStyle="italic"
                 android:textColor="@color/white" />
 
@@ -95,19 +95,22 @@
                 android:fontFamily="serif"
                 android:textColor="@color/white"
                 android:minHeight="48dp"/>
-            
+
             <Button
-                android:layout_width="match_parent"
+                android:layout_width="300dp"
                 android:layout_height="60dp"
                 android:text="Sign up"
+                android:background="@drawable/rounded_button"
                 android:backgroundTint="#433764"
                 android:textColor="@color/white"
                 android:id="@+id/signup_button"
-                android:textSize="18sp"
+                android:textSize="22sp"
                 android:layout_marginTop="30dp"
+                android:textAlignment="center"
                 android:fontFamily="serif"
+                android:textStyle="italic"
                 app:cornerRadius = "20dp"/>
-            
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
