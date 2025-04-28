@@ -59,7 +59,7 @@
                 android:background="@drawable/lavander_border"
                 android:drawableStart="@drawable/baseline_attach_email_24"
                 android:drawablePadding="8dp"
-                android:hint="Email"
+                android:hint="Gmail"
                 android:textColorHint="#F3F3F3"
                 android:padding="8dp"
                 android:textColor="@color/white"
