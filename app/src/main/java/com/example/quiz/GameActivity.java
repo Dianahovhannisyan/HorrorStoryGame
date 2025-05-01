@@ -4,11 +4,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.quiz.ui.main.Choice;
 import com.example.quiz.ui.main.GameLogic;
+import com.example.quiz.ui.main.StartWindowActivity;
 import com.example.quiz.ui.main.StoryScene;
 
 import java.util.List;
@@ -20,6 +22,7 @@ public class GameActivity extends AppCompatActivity {
 
     private GameLogic gameLogic;
     private StoryScene currentScene;
+    private ImageView PlayBackIcon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +36,18 @@ public class GameActivity extends AppCompatActivity {
         btnChoice3 = findViewById(R.id.btnChoice3);
 
         gameLogic = new GameLogic(this);
-        showScene("start");  // первая сцена
+        showScene("start");
+
+        PlayBackIcon = findViewById(R.id.play_back_icon);
+        PlayBackIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                backToMainMenu();
+            }
+        });
+
+
+
     }
 
     private void showScene(String sceneId) {
@@ -66,7 +80,15 @@ public class GameActivity extends AppCompatActivity {
         }
 
         if (sceneId.equals("end_game")) {
-            finish(); // или: startActivity(new Intent(this, LoginActivity.class));
+            finish();
         }
     }
+
+    private void backToMainMenu() {
+        Intent intent = new Intent(GameActivity.this, StartWindowActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        startActivity(intent);
+        finish();
+    }
+
 }

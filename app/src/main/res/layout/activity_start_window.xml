@@ -82,7 +82,7 @@
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:background="@drawable/rounded_button"
-        android:text="Exit"
+        android:text="LOG OUT"
         android:drawableLeft="@drawable/exit"
         android:textColor="#F8F8F8"
         android:textSize="18sp"

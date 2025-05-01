@@ -4,17 +4,35 @@
     android:layout_height="match_parent"
     android:background="@drawable/hospital"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="24dp"
+    android:gravity="top">
 
-    <TextView
-        android:id="@+id/tvTitle"
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:text="Заголовок"
-        android:textColor="@color/white"
-        android:textSize="24sp"
-        android:textStyle="bold" />
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="24dp">
+
+        <ImageView
+            android:id="@+id/play_back_icon"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/arrow_back"
+            android:layout_marginEnd="12dp"
+            android:contentDescription="Назад" />
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Заголовок"
+            android:textColor="@color/white"
+            android:textSize="26sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
 
     <TextView
         android:id="@+id/tvText"
@@ -23,26 +41,30 @@
         android:padding="8dp"
         android:text="Текст сцены..."
         android:textColor="@color/white"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:layout_marginBottom="24dp" />
+
 
     <Button
         android:id="@+id/btnChoice1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:text="Выбор 1"
         android:backgroundTint="#433764"
         android:textColor="#EDF8ED"
-        />
+        android:background="@drawable/rounded_button" />
 
     <Button
         android:id="@+id/btnChoice2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginVertical="8dp"
         android:text="Выбор 2"
         android:backgroundTint="#433764"
-        android:textColor="#EDF8ED"/>
+        android:textColor="#EDF8ED"
+        android:background="@drawable/rounded_button" />
 
     <Button
         android:id="@+id/btnChoice3"
@@ -51,6 +73,13 @@
         android:layout_marginTop="8dp"
         android:text="Выбор 3"
         android:backgroundTint="#433764"
-        android:textColor="#EDF8ED"/>
+        android:textColor="#EDF8ED"
+        android:background="@drawable/rounded_button" />
 
 </LinearLayout>
+
+
+
+
+
+
