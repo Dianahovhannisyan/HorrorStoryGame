@@ -36,15 +36,15 @@
                 android:textColor="@color/white" />
 
             <EditText
-                android:id="@+id/signup_name"
+                android:id="@+id/signup_username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:fontFamily="serif"
                 android:background="@drawable/lavander_border"
-                android:drawableStart="@drawable/baseline_3p_24"
+                android:drawableStart="@drawable/baseline_account_circle_24"
                 android:drawablePadding="8dp"
-                android:hint="Name"
+                android:hint="Username"
+                android:fontFamily="serif"
                 android:textColorHint="#F3F3F3"
                 android:padding="8dp"
                 android:textColor="#FFFFFF"
@@ -65,20 +65,7 @@
                 android:textColor="@color/white"
                 android:minHeight="48dp"/>
 
-            <EditText
-                android:id="@+id/signup_username"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/lavander_border"
-                android:drawableStart="@drawable/baseline_account_circle_24"
-                android:drawablePadding="8dp"
-                android:hint="Username"
-                android:fontFamily="serif"
-                android:textColorHint="#F3F3F3"
-                android:padding="8dp"
-                android:textColor="#FFFFFF"
-                android:minHeight="48dp"/>
+
 
             <EditText
                 android:id="@+id/signup_password"
@@ -91,6 +78,24 @@
                 android:textColorHint="#F3F3F3"
                 android:inputType="textPassword"
                 android:drawableStart="@drawable/baseline_lock_24"
+                android:padding="8dp"
+                android:fontFamily="serif"
+                android:textColor="@color/white"
+                android:drawableEnd="@drawable/visibility_off"
+                android:minHeight="48dp"/>
+
+            <EditText
+                android:id="@+id/signup_confirm_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/lavander_border"
+                android:drawablePadding="8dp"
+                android:hint="Confirm password"
+                android:textColorHint="#F3F3F3"
+                android:inputType="textPassword"
+                android:drawableStart="@drawable/baseline_lock_24"
+                android:drawableEnd="@drawable/visibility_off"
                 android:padding="8dp"
                 android:fontFamily="serif"
                 android:textColor="@color/white"

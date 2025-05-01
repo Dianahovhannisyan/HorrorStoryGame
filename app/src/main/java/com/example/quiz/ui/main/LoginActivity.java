@@ -2,12 +2,12 @@ package com.example.quiz.ui.main;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
+import android.view.MotionEvent;
 import android.widget.*;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.quiz.GameActivity;
 import com.example.quiz.R;
 import com.example.quiz.SignupActivity;
 import com.google.firebase.auth.FirebaseAuth;
@@ -20,6 +20,8 @@ public class LoginActivity extends AppCompatActivity {
     TextView signupRedirect;
 
     FirebaseAuth mAuth;
+
+    boolean isPasswordVisible = false; // флаг видимости пароля
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +39,37 @@ public class LoginActivity extends AppCompatActivity {
 
         signupRedirect.setOnClickListener(view -> {
             startActivity(new Intent(LoginActivity.this, SignupActivity.class));
+        });
+
+        setupPasswordVisibilityToggle();
+    }
+
+    private void setupPasswordVisibilityToggle() {
+        passwordField.setOnTouchListener((v, event) -> {
+            final int DRAWABLE_END = 2;
+            if (event.getAction() == MotionEvent.ACTION_UP) {
+                if (event.getRawX() >= (passwordField.getRight()
+                        - passwordField.getCompoundDrawables()[DRAWABLE_END].getBounds().width())) {
+
+                    isPasswordVisible = !isPasswordVisible;
+
+                    passwordField.setInputType(isPasswordVisible
+                            ? InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
+                            : InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+
+                    passwordField.setSelection(passwordField.getText().length());
+
+                    passwordField.setCompoundDrawablesWithIntrinsicBounds(
+                            passwordField.getCompoundDrawables()[0], null,
+                            getResources().getDrawable(
+                                    isPasswordVisible ? R.drawable.visibility : R.drawable.visibility_off
+                            ), null
+                    );
+
+                    return true;
+                }
+            }
+            return false;
         });
     }
 
