@@ -31,9 +31,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Sign in"
-                android:fontFamily="serif"
                 android:textAlignment="center"
                 android:textSize="30sp"
+                android:fontFamily="serif"
                 android:textStyle="italic"
                 android:textColor="@color/white" />
 

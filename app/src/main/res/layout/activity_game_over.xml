@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/startwindow">
+
+
+    <LinearLayout
+        android:id="@+id/gameOverPanel"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/game_over_background"
+        android:layout_centerInParent="true"
+        android:padding="70dp">
+
+
+        <TextView
+            android:id="@+id/gameOverText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:paddingBottom="32dp"
+            android:text="GAME OVER"
+            android:fontFamily="serif"
+            android:textStyle="italic"
+            android:textColor="#F5DEB3"
+            android:textSize="45sp"
+            />
+
+
+        <Button
+            android:id="@+id/retryButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="RETRY"
+            android:textSize="30sp"
+            android:fontFamily="serif"
+            android:textStyle="italic"
+            android:textColor="#F5DEB3"
+            android:background="@drawable/retry_button_background"
+            android:layout_marginBottom="16dp" />
+
+
+        <TextView
+            android:id="@+id/quitText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Quit game"
+            android:textSize="22sp"
+            android:textColor="#F5DEB3"
+            android:fontFamily="serif"
+            android:textStyle="italic"
+            android:layout_gravity="center" />
+
+    </LinearLayout>
+</RelativeLayout>
