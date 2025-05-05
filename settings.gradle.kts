@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Quiz"
+rootProject.name = "No Turning Back"
 include(":app")
  
