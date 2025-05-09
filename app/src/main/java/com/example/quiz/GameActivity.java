@@ -11,8 +11,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.quiz.ui.main.Choice;
 import com.example.quiz.ui.main.GameLogic;
 import com.example.quiz.ui.main.GameOverActivity;
-import com.example.quiz.ui.main.StartWindowActivity;
 import com.example.quiz.ui.main.SearchKeyActivity;
+import com.example.quiz.ui.main.StartWindowActivity;
 import com.example.quiz.ui.main.StoryScene;
 
 import java.util.List;
@@ -50,66 +50,79 @@ public class GameActivity extends AppCompatActivity {
         tvTitle.setText(currentScene.getTitle());
         tvText.setText(currentScene.getText());
 
-        List<Choice> choices = currentScene.getChoices();
-        setupChoiceButtons(choices);
+        tvText.setAlpha(0f);
+        tvText.animate().alpha(1f).setDuration(500).start();
 
-        if (sceneId.equals("end_game")) {
-            goToGameOver();
-        }
-    }
-
-    private void setupChoiceButtons(List<Choice> choices) {
         btnChoice1.setVisibility(View.GONE);
         btnChoice2.setVisibility(View.GONE);
         btnChoice3.setVisibility(View.GONE);
 
-        Button[] buttons = {btnChoice1, btnChoice2, btnChoice3};
+        if (currentScene.isGameOver()) {
+            tvText.setClickable(true);
+            tvText.setOnClickListener(v -> {
+                Intent intent = new Intent(GameActivity.this, GameOverActivity.class);
+                startActivity(intent);
+                finish();
+            });
 
-        for (int i = 0; i < choices.size() && i < buttons.length; i++) {
-            Choice choice = choices.get(i);
-            Button button = buttons[i];
-            button.setVisibility(View.VISIBLE);
-            button.setText(choice.getText());
-            button.setOnClickListener(v -> handleChoice(choice));
+            tvText.setAlpha(0f);
+            tvText.animate()
+                    .alpha(1f)
+                    .setDuration(1000)
+                    .withEndAction(() -> tvText.animate()
+                            .alpha(0.5f)
+                            .setDuration(1000)
+                            .withEndAction(() -> tvText.animate()
+                                    .alpha(1f)
+                                    .setDuration(1000)
+                                    .start())
+                            .start())
+                    .start();
+            return;
+        } else {
+            tvText.setClickable(false);
+            tvText.setOnClickListener(null);
         }
+
+        List<Choice> choices = currentScene.getChoices();
+        if (choices.size() > 0) setupChoiceButton(btnChoice1, choices.get(0));
+        if (choices.size() > 1) setupChoiceButton(btnChoice2, choices.get(1));
+        if (choices.size() > 2) setupChoiceButton(btnChoice3, choices.get(2));
+    }
+
+    private void setupChoiceButton(Button button, Choice choice) {
+        button.setText(choice.getText());
+        button.setVisibility(View.VISIBLE);
+        button.setOnClickListener(v -> handleChoice(choice));
+        animateButtonAppear(button);
+    }
+
+    private void animateButtonAppear(Button button) {
+        button.setAlpha(0f);
+        button.animate().alpha(1f).setDuration(500).start();
     }
 
     private void handleChoice(Choice choice) {
-        if (choice.getMiniGame() != null) {
-            startMiniGame(choice);
+        if ("flashlight_key".equals(choice.getMiniGame())) {
+            Intent intent = new Intent(this, SearchKeyActivity.class);
+            intent.putExtra("nextSceneId", choice.getNextSceneId());
+            startActivityForResult(intent, 1);
         } else {
             showScene(choice.getNextSceneId());
         }
     }
 
-    private void startMiniGame(Choice choice) {
-        Intent intent;
-        switch (choice.getMiniGame()) {
-            case "flashlight_key":
-                intent = new Intent(this, SearchKeyActivity.class);
-                break;
-            default:
-                // Добавь другие мини-игры здесь
-                return;
-        }
-
-        intent.putExtra("nextSceneId", choice.getNextSceneId());
-        startActivityForResult(intent, 1);
-    }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1 && resultCode == RESULT_OK) {
-            String nextSceneId = data.getStringExtra("nextSceneId");
-            showScene(nextSceneId);
+        if (requestCode == 1) {
+            if (resultCode == RESULT_OK && data != null) {
+                String nextSceneId = data.getStringExtra("nextSceneId");
+                showScene(nextSceneId);
+            } else {
+                showScene("surch_key_fail");
+            }
         }
-    }
-
-    private void goToGameOver() {
-        Intent intent = new Intent(this, GameOverActivity.class);
-        startActivity(intent);
-        finish();
     }
 
     private void backToMainMenu() {

@@ -33,6 +33,7 @@ public class GameLogic {
                 String id = sceneObj.getString("id");
                 String title = sceneObj.optString("title", "");
                 String text = sceneObj.getString("text");
+                boolean isGameOver = sceneObj.optBoolean("isGameOver", false);
 
                 List<Choice> choices = new ArrayList<>();
                 JSONArray choicesArray = sceneObj.getJSONArray("choices");
@@ -46,7 +47,7 @@ public class GameLogic {
                     ));
                 }
 
-                StoryScene scene = new StoryScene(id, title, text, choices);
+                StoryScene scene = new StoryScene(id, title, text, isGameOver, choices);
                 scenes.put(id, scene);
             }
         } catch (Exception e) {
