@@ -1,6 +1,5 @@
 package com.example.quiz;
 
-
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -28,9 +27,14 @@ public class SurchKey extends View {
     private boolean keyVisible = false;
     private boolean timerStarted = false;
     private long startTime;
-    private final long timeLimit = 10000;
+    private final long timeLimit = 7000;
     private Handler handler;
     private Runnable timerRunnable;
+    private OnGameWonListener onGameWonListener;
+
+    public interface OnGameWonListener {
+        void onGameWon();
+    }
 
     public SurchKey(Context context) {
         super(context);
@@ -53,7 +57,7 @@ public class SurchKey extends View {
         textPaint.setTextAlign(Paint.Align.CENTER);
 
         flashlightPaint = new Paint();
-        flashlightPaint.setColor(Color.argb(200, 255, 255, 0)); // Жёлтый цвет
+        flashlightPaint.setColor(Color.argb(200, 255, 255, 0));
         flashlightPaint.setStyle(Paint.Style.FILL);
 
         flashlightPath = new Path();
@@ -73,11 +77,19 @@ public class SurchKey extends View {
                         invalidate();
                     } else {
                         handler.postDelayed(this, 100);
-                        invalidate(); // Обновляем экран для отображения таймера
+                        invalidate();
                     }
                 }
             }
         };
+    }
+
+    public void setOnGameWonListener(OnGameWonListener listener) {
+        this.onGameWonListener = listener;
+    }
+
+    public boolean isGameWon() {
+        return gameWon;
     }
 
     public void setKeyPosition(float x, float y) {
@@ -138,7 +150,6 @@ public class SurchKey extends View {
                 if (!timerStarted) {
                     timerStarted = true;
                     startTime = System.currentTimeMillis();
-                    handler.removeCallbacks(timerRunnable); // Защита от дублирования
                     handler.post(timerRunnable);
                 }
                 flashlightX = x;
@@ -152,6 +163,9 @@ public class SurchKey extends View {
                         y >= keyY && y <= keyY + keySize) {
                     gameWon = true;
                     handler.removeCallbacks(timerRunnable);
+                    if (onGameWonListener != null) {
+                        onGameWonListener.onGameWon();
+                    }
                     invalidate();
                 }
                 break;

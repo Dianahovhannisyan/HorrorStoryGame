@@ -10,7 +10,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.quiz.ui.main.Choice;
 import com.example.quiz.ui.main.GameLogic;
+import com.example.quiz.ui.main.GameOverActivity;
 import com.example.quiz.ui.main.StartWindowActivity;
+import com.example.quiz.ui.main.SearchKeyActivity;
 import com.example.quiz.ui.main.StoryScene;
 
 import java.util.List;
@@ -19,10 +21,9 @@ public class GameActivity extends AppCompatActivity {
 
     private TextView tvTitle, tvText;
     private Button btnChoice1, btnChoice2, btnChoice3;
-
     private GameLogic gameLogic;
     private StoryScene currentScene;
-    private ImageView PlayBackIcon;
+    private ImageView playBackIcon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,20 +35,12 @@ public class GameActivity extends AppCompatActivity {
         btnChoice1 = findViewById(R.id.btnChoice1);
         btnChoice2 = findViewById(R.id.btnChoice2);
         btnChoice3 = findViewById(R.id.btnChoice3);
+        playBackIcon = findViewById(R.id.play_back_icon);
 
         gameLogic = new GameLogic(this);
         showScene("start");
 
-        PlayBackIcon = findViewById(R.id.play_back_icon);
-        PlayBackIcon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                backToMainMenu();
-            }
-        });
-
-
-
+        playBackIcon.setOnClickListener(v -> backToMainMenu());
     }
 
     private void showScene(String sceneId) {
@@ -58,37 +51,71 @@ public class GameActivity extends AppCompatActivity {
         tvText.setText(currentScene.getText());
 
         List<Choice> choices = currentScene.getChoices();
+        setupChoiceButtons(choices);
 
+        if (sceneId.equals("end_game")) {
+            goToGameOver();
+        }
+    }
+
+    private void setupChoiceButtons(List<Choice> choices) {
         btnChoice1.setVisibility(View.GONE);
         btnChoice2.setVisibility(View.GONE);
         btnChoice3.setVisibility(View.GONE);
 
-        if (choices.size() > 0) {
-            btnChoice1.setVisibility(View.VISIBLE);
-            btnChoice1.setText(choices.get(0).getText());
-            btnChoice1.setOnClickListener(v -> showScene(choices.get(0).getNextSceneId()));
-        }
-        if (choices.size() > 1) {
-            btnChoice2.setVisibility(View.VISIBLE);
-            btnChoice2.setText(choices.get(1).getText());
-            btnChoice2.setOnClickListener(v -> showScene(choices.get(1).getNextSceneId()));
-        }
-        if (choices.size() > 2) {
-            btnChoice3.setVisibility(View.VISIBLE);
-            btnChoice3.setText(choices.get(2).getText());
-            btnChoice3.setOnClickListener(v -> showScene(choices.get(2).getNextSceneId()));
-        }
+        Button[] buttons = {btnChoice1, btnChoice2, btnChoice3};
 
-        if (sceneId.equals("end_game")) {
-            finish();
+        for (int i = 0; i < choices.size() && i < buttons.length; i++) {
+            Choice choice = choices.get(i);
+            Button button = buttons[i];
+            button.setVisibility(View.VISIBLE);
+            button.setText(choice.getText());
+            button.setOnClickListener(v -> handleChoice(choice));
         }
     }
 
-    private void backToMainMenu() {
-        Intent intent = new Intent(GameActivity.this, StartWindowActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+    private void handleChoice(Choice choice) {
+        if (choice.getMiniGame() != null) {
+            startMiniGame(choice);
+        } else {
+            showScene(choice.getNextSceneId());
+        }
+    }
+
+    private void startMiniGame(Choice choice) {
+        Intent intent;
+        switch (choice.getMiniGame()) {
+            case "flashlight_key":
+                intent = new Intent(this, SearchKeyActivity.class);
+                break;
+            default:
+                // Добавь другие мини-игры здесь
+                return;
+        }
+
+        intent.putExtra("nextSceneId", choice.getNextSceneId());
+        startActivityForResult(intent, 1);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1 && resultCode == RESULT_OK) {
+            String nextSceneId = data.getStringExtra("nextSceneId");
+            showScene(nextSceneId);
+        }
+    }
+
+    private void goToGameOver() {
+        Intent intent = new Intent(this, GameOverActivity.class);
         startActivity(intent);
         finish();
     }
 
+    private void backToMainMenu() {
+        Intent intent = new Intent(this, StartWindowActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        startActivity(intent);
+        finish();
+    }
 }

@@ -38,9 +38,11 @@ public class GameLogic {
                 JSONArray choicesArray = sceneObj.getJSONArray("choices");
                 for (int j = 0; j < choicesArray.length(); j++) {
                     JSONObject choiceObj = choicesArray.getJSONObject(j);
+                    String miniGame = choiceObj.optString("miniGame", null);
                     choices.add(new Choice(
                             choiceObj.getString("text"),
-                            choiceObj.getString("nextSceneId")
+                            choiceObj.getString("nextSceneId"),
+                            miniGame
                     ));
                 }
 
