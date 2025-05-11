@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@drawable/startwindow"
+    android:gravity="center"
+    android:padding="16dp">
+
+
+    <TextView
+        android:id="@+id/keyrules"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Правила игры\nФонарик и Ключ "
+        android:textSize="32sp"
+        android:textColor="#FFFFFF"
+        android:padding="8dp"
+        android:layout_marginBottom="24dp"
+        android:textStyle="italic"
+        android:fontFamily="serif"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Цель: Найти ключ в тёмной комнате за 7 секунд."
+        android:textSize="18sp"
+        android:textColor="#FFFFFF"
+        android:padding="15dp"
+        />
+
+    <LinearLayout
+        android:id="@+id/rule_flashlight"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:layout_marginBottom="16dp">
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/flashlight_icon"
+            app:tint="#FFFFFF"
+            android:layout_marginEnd="16dp"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1.Касайся экрана, чтобы двигать луч фонарика."
+            android:textSize="18sp"
+            android:textColor="#FFFFFF"
+            />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/rule_key"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:layout_marginBottom="16dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/key_icon"
+            app:tint="#FFFFFF"
+            android:layout_marginEnd="16dp"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2.Главная твоя цель найти ключ, но не забывай и о времени"
+            android:textSize="18sp"
+            android:textColor="#FFFFFF"/>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/rule_examine"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:layout_marginBottom="24dp">
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            app:tint="#FFFFFF"
+            android:src="@drawable/loup_icon"
+            android:layout_marginEnd="16dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="3. Будь внимательным, потому что ключ очень маленький"
+            android:textSize="18sp"
+            android:textColor="#FFFFFF"/>
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/start_game_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="НАЧАТЬ ИГРУ"
+        android:textSize="18sp"
+        android:background="@drawable/rounded_button"
+        android:textColor="#F6F2F2"
+        android:padding="12dp"
+        android:layout_marginTop="16dp"/>
+</LinearLayout>
