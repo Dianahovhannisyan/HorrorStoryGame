@@ -20,8 +20,8 @@ public class SurchKey extends View {
     private Path flashlightPath;
     private float flashlightX, flashlightY;
     private float keyX, keyY;
-    private float keySize = 40f;
-    private final float flashlightRadius = 150f;
+    private float keySize = 30f;
+    private final float flashlightRadius = 100f;
     private boolean gameWon = false;
     private boolean gameOver = false;
     private boolean keyVisible = false;

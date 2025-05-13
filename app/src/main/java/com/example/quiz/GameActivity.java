@@ -12,6 +12,7 @@ import com.example.quiz.ui.main.Choice;
 import com.example.quiz.ui.main.GameLogic;
 import com.example.quiz.ui.main.GameOverActivity;
 import com.example.quiz.ui.main.SearchKeyActivity;
+import com.example.quiz.ui.main.DoorChoiceActivity; // Добавляем импорт
 import com.example.quiz.ui.main.StartWindowActivity;
 import com.example.quiz.ui.main.StoryScene;
 
@@ -103,8 +104,16 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void handleChoice(Choice choice) {
-        if ("flashlight_key".equals(choice.getMiniGame())) {
-            Intent intent = new Intent(this, SearchKeyActivity.class);
+        if (choice.getMiniGame() != null) {
+            Intent intent;
+            if ("flashlight_key".equals(choice.getMiniGame())) {
+                intent = new Intent(this, SearchKeyActivity.class);
+            } else if ("door_choice".equals(choice.getMiniGame())) {
+                intent = new Intent(this, DoorChoiceActivity.class);
+            } else {
+                showScene(choice.getNextSceneId());
+                return;
+            }
             intent.putExtra("nextSceneId", choice.getNextSceneId());
             startActivityForResult(intent, 1);
         } else {

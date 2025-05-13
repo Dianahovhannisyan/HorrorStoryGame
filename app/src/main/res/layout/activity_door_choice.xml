@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#121212">
+
+    <TextView
+        android:id="@+id/doorTimer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:text="10.0"
+        android:textColor="#FF0000"
+        android:textSize="28sp"
+        android:background="#33FFFFFF"
+        android:padding="8dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/redDoorLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Красная дверь"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintTop_toBottomOf="@id/doorTimer"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/yellowDoorLabel"
+        app:layout_constraintHorizontal_chainStyle="spread" />
+
+    <ImageButton
+        android:id="@+id/redDoorButton"
+        android:layout_width="150dp"
+        android:layout_height="200dp"
+        android:src="@drawable/red_door"
+        android:background="#00000000"
+        android:layout_margin="16dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintTop_toBottomOf="@id/redDoorLabel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/yellowDoorButton"
+        android:contentDescription="Красная дверь" />
+
+    <ImageButton
+        android:id="@+id/redDoorActionButton"
+        android:layout_width="150dp"
+        android:layout_height="60dp"
+        android:src="@drawable/button_door"
+        android:background="#00000000"
+        android:layout_margin="16dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintTop_toBottomOf="@id/redDoorButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/yellowDoorActionButton"
+        android:contentDescription="Выбрать Красную дверь" />
+
+    <TextView
+        android:id="@+id/yellowDoorLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Жёлтая дверь"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintTop_toBottomOf="@id/doorTimer"
+        app:layout_constraintStart_toEndOf="@id/redDoorLabel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_chainStyle="spread" />
+
+    <ImageButton
+        android:id="@+id/yellowDoorButton"
+        android:layout_width="150dp"
+        android:layout_height="200dp"
+        android:src="@drawable/yellow_door"
+        android:background="#00000000"
+        android:layout_margin="16dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintTop_toBottomOf="@id/yellowDoorLabel"
+        app:layout_constraintStart_toEndOf="@id/redDoorButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:contentDescription="Жёлтая дверь" />
+
+    <ImageButton
+        android:id="@+id/yellowDoorActionButton"
+        android:layout_width="150dp"
+        android:layout_height="60dp"
+        android:src="@drawable/button_door"
+        android:background="#00000000"
+        android:layout_margin="16dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintTop_toBottomOf="@id/yellowDoorButton"
+        app:layout_constraintStart_toEndOf="@id/redDoorActionButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:contentDescription="Выбрать Жёлтую дверь" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

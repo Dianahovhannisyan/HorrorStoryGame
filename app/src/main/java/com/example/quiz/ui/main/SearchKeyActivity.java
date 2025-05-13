@@ -12,7 +12,7 @@ public class SearchKeyActivity extends AppCompatActivity {
     private SurchKey surchKeyView;
     private Handler handler;
     private Runnable gameOverRunnable;
-    private static final long TIME_LIMIT = 7000; // 7 секунд
+    private static final long TIME_LIMIT = 7000;
     private String nextSceneId;
 
     @Override
