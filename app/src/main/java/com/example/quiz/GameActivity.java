@@ -107,7 +107,7 @@ public class GameActivity extends AppCompatActivity {
         if (choice.getMiniGame() != null) {
             Intent intent;
             if ("flashlight_key".equals(choice.getMiniGame())) {
-                intent = new Intent(this, SearchKeyActivity.class);
+                intent = new Intent(this, RulesKeyActivity.class);
             } else if ("door_choice".equals(choice.getMiniGame())) {
                 intent = new Intent(this, DoorChoiceActivity.class);
             } else {
