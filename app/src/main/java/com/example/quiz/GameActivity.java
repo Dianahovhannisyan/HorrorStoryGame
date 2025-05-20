@@ -11,8 +11,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.quiz.ui.main.Choice;
 import com.example.quiz.ui.main.GameLogic;
 import com.example.quiz.ui.main.GameOverActivity;
-import com.example.quiz.ui.main.SearchKeyActivity;
-import com.example.quiz.ui.main.DoorChoiceActivity; // Добавляем импорт
+import com.example.quiz.ui.main.PicturesSeeActivity;
+import com.example.quiz.ui.main.DoorChoiceActivity;
 import com.example.quiz.ui.main.StartWindowActivity;
 import com.example.quiz.ui.main.StoryScene;
 
@@ -110,6 +110,8 @@ public class GameActivity extends AppCompatActivity {
                 intent = new Intent(this, RulesKeyActivity.class);
             } else if ("door_choice".equals(choice.getMiniGame())) {
                 intent = new Intent(this, DoorChoiceActivity.class);
+            } else if ("pictures_see".equals(choice.getMiniGame())) {
+                intent = new Intent(this, PicturesSeeActivity.class);
             } else {
                 showScene(choice.getNextSceneId());
                 return;
