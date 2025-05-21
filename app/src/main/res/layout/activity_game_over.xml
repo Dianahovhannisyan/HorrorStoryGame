@@ -34,7 +34,7 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:paddingBottom="32dp"
-            android:text="Удачи в следуущий раз"
+            android:text="Ты сделал неверный выбор"
             android:fontFamily="sans-serif-medium"
             android:textSize="24sp"
             android:textColor="#FFFFFF" />
