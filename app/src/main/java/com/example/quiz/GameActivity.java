@@ -112,6 +112,8 @@ public class GameActivity extends AppCompatActivity {
                 intent = new Intent(this, DoorChoiceActivity.class);
             } else if ("pictures_see".equals(choice.getMiniGame())) {
                 intent = new Intent(this, PicturesSeeActivity.class);
+            } else if ("pillar_riddle".equals(choice.getMiniGame())) {
+                intent = new Intent(this, PillarActivity.class);
             } else {
                 showScene(choice.getNextSceneId());
                 return;

@@ -1,10 +1,167 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PillarActivity">
+    android:background="#121212"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/riddleText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="✨Загадка:\nПервый — и быстрый, и тихий, и пуглив\nВторой — кажется милым, но способен на коварство\nТретий — ходит в одиночку, хотя когда-то был другом"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="16dp"/>
+
+    <LinearLayout
+        android:id="@+id/pillarLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/riddleText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp">
+
+        <ImageView
+            android:id="@+id/pillar1"
+            android:layout_width="0dp"
+            android:layout_height="200dp"
+            android:layout_weight="1"
+            android:src="@drawable/pillar1"
+            android:scaleType="fitCenter"
+            android:layout_margin="8dp" />
+
+        <ImageView
+            android:id="@+id/pillar2"
+            android:layout_width="0dp"
+            android:layout_height="200dp"
+            android:layout_weight="1"
+            android:src="@drawable/pillar2"
+            android:scaleType="fitCenter"
+            android:layout_margin="8dp" />
+
+        <ImageView
+            android:id="@+id/pillar3"
+            android:layout_width="0dp"
+            android:layout_height="200dp"
+            android:layout_weight="1"
+            android:src="@drawable/pillar3"
+            android:scaleType="fitCenter"
+            android:layout_margin="8dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/upperStones"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/pillarLayout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp">
+
+        <ImageView
+            android:id="@+id/stone1"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/dog"
+            android:tag="false"
+            android:layout_margin="8dp" />
+
+        <ImageView
+            android:id="@+id/stone2"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/cat"
+            android:tag="false"
+        android:layout_margin="8dp" />
+
+        <ImageView
+            android:id="@+id/stone3"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/wolf"
+            android:tag="true"
+        android:layout_margin="8dp" />
+
+        <ImageView
+            android:id="@+id/stone7"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/rabbit"
+            android:tag="true"
+        android:layout_margin="8dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lowerStones"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/upperStones"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp">
+
+        <ImageView
+            android:id="@+id/stone4"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/squirrel"
+            android:tag="false"
+        android:layout_margin="8dp" />
+
+        <ImageView
+            android:id="@+id/stone5"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/fox"
+            android:tag="true"
+        android:layout_margin="8dp" />
+
+        <ImageView
+            android:id="@+id/stone6"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/raccoon"
+            android:tag="false"
+           android:layout_margin="8dp" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/checkButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Проверить"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#6F6E6E"
+        android:layout_marginTop="12dp"
+        app:layout_constraintTop_toBottomOf="@id/lowerStones"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <Button
+        android:id="@+id/continueButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Продолжить"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#6F6E6E"
+        android:layout_marginTop="12dp"
+        app:layout_constraintTop_toBottomOf="@id/lowerStones"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="gone" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

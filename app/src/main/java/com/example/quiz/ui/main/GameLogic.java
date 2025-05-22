@@ -1,9 +1,13 @@
 package com.example.quiz.ui.main;
 
 import android.content.Context;
+import android.util.Log;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
+
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -23,7 +27,7 @@ public class GameLogic {
             byte[] buffer = new byte[size];
             is.read(buffer);
             is.close();
-            String json = new String(buffer, "UTF-8");
+            String json = new String(buffer, StandardCharsets.UTF_8);
 
             JSONObject jsonObject = new JSONObject(json);
             JSONArray sceneArray = jsonObject.getJSONArray("scenes");
@@ -39,19 +43,25 @@ public class GameLogic {
                 JSONArray choicesArray = sceneObj.getJSONArray("choices");
                 for (int j = 0; j < choicesArray.length(); j++) {
                     JSONObject choiceObj = choicesArray.getJSONObject(j);
+
+                    String textChoice = choiceObj.getString("text");
+                    String nextSceneId = choiceObj.optString("nextSceneId", null);
                     String miniGame = choiceObj.optString("miniGame", null);
-                    choices.add(new Choice(
-                            choiceObj.getString("text"),
-                            choiceObj.getString("nextSceneId"),
-                            miniGame
-                    ));
+
+                    Choice choice = new Choice(textChoice, nextSceneId, miniGame);
+                    choices.add(choice);
+
+                    Log.d("GameLogic", "Choice loaded: \"" + textChoice + "\" → " + nextSceneId +
+                            (miniGame != null ? " [miniGame: " + miniGame + "]" : ""));
                 }
 
                 StoryScene scene = new StoryScene(id, title, text, isGameOver, choices);
                 scenes.put(id, scene);
+                Log.d("GameLogic", "Scene loaded: " + id + " with " + choices.size() + " choices");
             }
         } catch (Exception e) {
             e.printStackTrace();
+            Log.e("GameLogic", "Ошибка загрузки JSON: " + e.getMessage());
         }
     }
 
