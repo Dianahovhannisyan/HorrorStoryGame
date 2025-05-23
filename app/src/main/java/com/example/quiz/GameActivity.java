@@ -2,6 +2,7 @@ package com.example.quiz;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -46,7 +47,10 @@ public class GameActivity extends AppCompatActivity {
 
     private void showScene(String sceneId) {
         currentScene = gameLogic.getScene(sceneId);
-        if (currentScene == null) return;
+        if (currentScene == null) {
+            Log.d("GameActivity", "Scene not found: " + sceneId);
+            return;
+        }
 
         tvTitle.setText(currentScene.getTitle());
         tvText.setText(currentScene.getText());
@@ -114,7 +118,10 @@ public class GameActivity extends AppCompatActivity {
                 intent = new Intent(this, PicturesSeeActivity.class);
             } else if ("pillar_riddle".equals(choice.getMiniGame())) {
                 intent = new Intent(this, PillarActivity.class);
+            } else if ("true".equals(choice.getMiniGame())) {
+                intent = new Intent(this, TrueActivity.class);
             } else {
+                Log.d("GameActivity", "Unknown miniGame: " + choice.getMiniGame());
                 showScene(choice.getNextSceneId());
                 return;
             }
@@ -128,11 +135,14 @@ public class GameActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        Log.d("GameActivity", "onActivityResult - requestCode: " + requestCode + ", resultCode: " + resultCode + ", data: " + data);
         if (requestCode == 1) {
             if (resultCode == RESULT_OK && data != null) {
                 String nextSceneId = data.getStringExtra("nextSceneId");
+                Log.d("GameActivity", "Next scene ID: " + nextSceneId);
                 showScene(nextSceneId);
             } else {
+                Log.d("GameActivity", "Game failed, showing surch_key_fail");
                 showScene("surch_key_fail");
             }
         }
