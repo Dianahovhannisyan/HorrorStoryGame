@@ -55,6 +55,14 @@ public class GameActivity extends AppCompatActivity {
         tvTitle.setText(currentScene.getTitle());
         tvText.setText(currentScene.getText());
 
+        if ("true_continue".equals(currentScene.getId())) {
+            Intent intent = new Intent(GameActivity.this, FirsEndActivity.class);
+            intent.putExtra("sceneText", currentScene.getText());
+            startActivity(intent);
+            finish();
+            return;
+        }
+
         tvText.setAlpha(0f);
         tvText.animate().alpha(1f).setDuration(500).start();
 
