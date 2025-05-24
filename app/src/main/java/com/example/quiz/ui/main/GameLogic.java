@@ -32,6 +32,7 @@ public class GameLogic {
             JSONObject jsonObject = new JSONObject(json);
             JSONArray sceneArray = jsonObject.getJSONArray("scenes");
 
+
             for (int i = 0; i < sceneArray.length(); i++) {
                 JSONObject sceneObj = sceneArray.getJSONObject(i);
                 String id = sceneObj.getString("id");

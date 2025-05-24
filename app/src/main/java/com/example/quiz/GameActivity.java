@@ -1,7 +1,5 @@
 package com.example.quiz;
 
-import static androidx.core.app.ActivityCompat.startActivityForResult;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -134,6 +132,8 @@ public class GameActivity extends AppCompatActivity {
                 intent = new Intent(this, AnketaActivity.class);
                 intent.putExtra("sceneText", currentScene.getText());
                 intent.putExtra("nextSceneId", choice.getNextSceneId());
+            } else if ("gloves".equals(choice.getMiniGame())) {
+                intent = new Intent(this, GlovesActivity.class);
             } else {
                 Log.d("GameActivity", "Unknown miniGame: " + choice.getMiniGame());
                 showScene(choice.getNextSceneId());
