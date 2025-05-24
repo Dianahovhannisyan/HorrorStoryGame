@@ -45,19 +45,19 @@ public class PicturesSeeActivity extends AppCompatActivity {
 
     private void showImage1() {
         image1.setVisibility(View.VISIBLE);
-        handler.postDelayed(() -> showImage2(), 5000);
+        handler.postDelayed(() -> showImage2(), 3000);
     }
 
 
     private void showImage2() {
         image2.setVisibility(View.VISIBLE);
-        handler.postDelayed(() -> showImage3(), 5000);
+        handler.postDelayed(() -> showImage3(), 3000);
     }
 
 
     private void showImage3() {
         image3.setVisibility(View.VISIBLE);
-        handler.postDelayed(() -> showContinueButton(), 5000);
+        handler.postDelayed(() -> showContinueButton(), 3000);
     }
 
 
