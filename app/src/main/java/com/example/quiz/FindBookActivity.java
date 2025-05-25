@@ -26,6 +26,7 @@ public class FindBookActivity extends Activity {
     private Random random = new Random();
 
     private ImageView diary;
+    private ImageView revealImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +37,7 @@ public class FindBookActivity extends Activity {
         timerText = findViewById(R.id.timerText);
         nextSceneId = getIntent().getStringExtra("nextSceneId");
 
+        createRevealImage();
         setupGame();
         startTimer();
     }
@@ -49,13 +51,14 @@ public class FindBookActivity extends Activity {
         diary.setVisibility(View.INVISIBLE);
         diary.setOnClickListener(v -> {
             if (!gameEnded && diary.getVisibility() == View.VISIBLE) {
-                endGame(true);
+                diary.setVisibility(View.GONE);
+                revealImage.setVisibility(View.VISIBLE);
             }
         });
         rootLayout.addView(diary);
+
         int paperCount = 60;
         AtomicInteger papersOverDiary = new AtomicInteger(0);
-
 
         for (int i = 0; i < paperCount; i++) {
             ImageView paper = new ImageView(this);
@@ -63,7 +66,7 @@ public class FindBookActivity extends Activity {
             int resId = getResources().getIdentifier("paper" + paperNumber, "drawable", getPackageName());
             paper.setImageResource(resId);
 
-            FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(250, 250);
+            FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(200, 200);
             paper.setLayoutParams(params);
 
             float x = getRandomX();
@@ -90,6 +93,23 @@ public class FindBookActivity extends Activity {
         }, 500);
     }
 
+    private void createRevealImage() {
+        revealImage = new ImageView(this);
+        revealImage.setImageResource(R.drawable.book_found);
+        revealImage.setLayoutParams(new FrameLayout.LayoutParams(
+                FrameLayout.LayoutParams.MATCH_PARENT,
+                FrameLayout.LayoutParams.MATCH_PARENT
+        ));
+        revealImage.setScaleType(ImageView.ScaleType.FIT_CENTER);
+        revealImage.setVisibility(View.GONE);
+        revealImage.setOnClickListener(v -> {
+            Intent result = new Intent();
+            result.putExtra("nextSceneId", nextSceneId);
+            setResult(RESULT_OK, result);
+            finish();
+        });
+        rootLayout.addView(revealImage);
+    }
 
     private float getRandomX() {
         Point size = new Point();
@@ -131,7 +151,7 @@ public class FindBookActivity extends Activity {
         boolean isCovered = false;
         for (int i = 0; i < rootLayout.getChildCount(); i++) {
             View child = rootLayout.getChildAt(i);
-            if (child != diary && isOverlapping(child, diary)) {
+            if (child != diary && child != revealImage && isOverlapping(child, diary)) {
                 isCovered = true;
                 break;
             }
