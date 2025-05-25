@@ -13,6 +13,12 @@
         android:theme="@style/Theme.Quiz"
         tools:targetApi="31">
         <activity
+            android:name=".FindBookActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ParolActivity"
+            android:exported="false" />
+        <activity
             android:name=".GlovesActivity"
             android:exported="false" />
         <activity
