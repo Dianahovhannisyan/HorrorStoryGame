@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.quiz.ui.main.Choice;
@@ -16,6 +17,10 @@ import com.example.quiz.ui.main.PicturesSeeActivity;
 import com.example.quiz.ui.main.DoorChoiceActivity;
 import com.example.quiz.ui.main.StartWindowActivity;
 import com.example.quiz.ui.main.StoryScene;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
 
@@ -32,6 +37,7 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
+        // Инициализация UI
         tvTitle = findViewById(R.id.tvTitle);
         tvText = findViewById(R.id.tvText);
         btnChoice1 = findViewById(R.id.btnChoice1);
@@ -39,17 +45,32 @@ public class GameActivity extends AppCompatActivity {
         btnChoice3 = findViewById(R.id.btnChoice3);
         playBackIcon = findViewById(R.id.play_back_icon);
 
+        // Загрузка логики и начальной сцены
         gameLogic = new GameLogic(this);
-        showScene("start");
+        String sceneId = getIntent().getStringExtra("startSceneId");
+        if (sceneId == null) sceneId = "start";
+        showScene(sceneId);
 
         playBackIcon.setOnClickListener(v -> backToMainMenu());
     }
 
     private void showScene(String sceneId) {
         currentScene = gameLogic.getScene(sceneId);
+
         if (currentScene == null) {
-            Log.d("GameActivity", "Scene not found: " + sceneId);
+            Log.e("GameActivity", "Scene not found: " + sceneId);
+            tvTitle.setText("Ошибка");
+            tvText.setText("Сцена не найдена: " + sceneId);
             return;
+        }
+
+        // Сохраняем текущую сцену в Firebase
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users")
+                    .child(user.getUid())
+                    .child("currentSceneId");
+            ref.setValue(currentScene.getId());
         }
 
         tvTitle.setText(currentScene.getTitle());
@@ -77,20 +98,7 @@ public class GameActivity extends AppCompatActivity {
                 startActivity(intent);
                 finish();
             });
-
-            tvText.setAlpha(0f);
-            tvText.animate()
-                    .alpha(1f)
-                    .setDuration(1000)
-                    .withEndAction(() -> tvText.animate()
-                            .alpha(0.5f)
-                            .setDuration(1000)
-                            .withEndAction(() -> tvText.animate()
-                                    .alpha(1f)
-                                    .setDuration(1000)
-                                    .start())
-                            .start())
-                    .start();
+            animateTextPulse();
             return;
         } else if (currentScene.isGameWin()) {
             tvText.setClickable(true);
@@ -99,20 +107,7 @@ public class GameActivity extends AppCompatActivity {
                 startActivity(intent);
                 finish();
             });
-
-            tvText.setAlpha(0f);
-            tvText.animate()
-                    .alpha(1f)
-                    .setDuration(1000)
-                    .withEndAction(() -> tvText.animate()
-                            .alpha(0.5f)
-                            .setDuration(1000)
-                            .withEndAction(() -> tvText.animate()
-                                    .alpha(1f)
-                                    .setDuration(1000)
-                                    .start())
-                            .start())
-                    .start();
+            animateTextPulse();
             return;
         } else {
             tvText.setClickable(false);
@@ -123,6 +118,22 @@ public class GameActivity extends AppCompatActivity {
         if (choices.size() > 0) setupChoiceButton(btnChoice1, choices.get(0));
         if (choices.size() > 1) setupChoiceButton(btnChoice2, choices.get(1));
         if (choices.size() > 2) setupChoiceButton(btnChoice3, choices.get(2));
+    }
+
+    private void animateTextPulse() {
+        tvText.setAlpha(0f);
+        tvText.animate()
+                .alpha(1f)
+                .setDuration(1000)
+                .withEndAction(() -> tvText.animate()
+                        .alpha(0.5f)
+                        .setDuration(1000)
+                        .withEndAction(() -> tvText.animate()
+                                .alpha(1f)
+                                .setDuration(1000)
+                                .start())
+                        .start())
+                .start();
     }
 
     private void setupChoiceButton(Button button, Choice choice) {
@@ -140,40 +151,55 @@ public class GameActivity extends AppCompatActivity {
     private void handleChoice(Choice choice) {
         if (choice.getMiniGame() != null) {
             Intent intent;
-            if ("flashlight_key".equals(choice.getMiniGame())) {
-                intent = new Intent(this, RulesKeyActivity.class);
-            } else if ("door_choice".equals(choice.getMiniGame())) {
-                intent = new Intent(this, DoorChoiceActivity.class);
-            } else if ("pictures_see".equals(choice.getMiniGame())) {
-                intent = new Intent(this, PicturesSeeActivity.class);
-            } else if ("pillar_riddle".equals(choice.getMiniGame())) {
-                intent = new Intent(this, PillarActivity.class);
-            } else if ("true".equals(choice.getMiniGame())) {
-                intent = new Intent(this, TrueActivity.class);
-            } else if ("anketa".equals(choice.getMiniGame())) {
-                intent = new Intent(this, AnketaActivity.class);
-                intent.putExtra("sceneText", currentScene.getText());
-                intent.putExtra("nextSceneId", choice.getNextSceneId());
-            } else if ("gloves".equals(choice.getMiniGame())) {
-                intent = new Intent(this, GlovesActivity.class);
-            } else if ("find_book".equals(choice.getMiniGame())) {
-                intent = new Intent(this, FindBookActivity.class);
-                intent.putExtra("nextSceneId", choice.getNextSceneId());
-            } else if ("parol".equals(choice.getMiniGame())) {
-                intent = new Intent(this, ParolActivity.class);
-            } else if ("diagram".equals(choice.getMiniGame())) {
-                intent = new Intent(this, DiagramActivity.class);
-            } else if ("mirror".equals(choice.getMiniGame())) {
-                intent = new Intent(this, MirrorActivity.class);
-            } else if ("picture_key".equals(choice.getMiniGame())) {
-                intent = new Intent(this, PicturesKeyActivity.class);
-            } else if ("chasi".equals(choice.getMiniGame())) {
-                intent = new Intent(this, ChasiActivity.class);
-            } else {
-                Log.d("GameActivity", "Unknown miniGame: " + choice.getMiniGame());
-                showScene(choice.getNextSceneId());
-                return;
+            switch (choice.getMiniGame()) {
+                case "flashlight_key":
+                    intent = new Intent(this, RulesKeyActivity.class);
+                    break;
+                case "door_choice":
+                    intent = new Intent(this, DoorChoiceActivity.class);
+                    break;
+                case "pictures_see":
+                    intent = new Intent(this, PicturesSeeActivity.class);
+                    break;
+                case "pillar_riddle":
+                    intent = new Intent(this, PillarActivity.class);
+                    break;
+                case "true":
+                    intent = new Intent(this, TrueActivity.class);
+                    break;
+                case "anketa":
+                    intent = new Intent(this, AnketaActivity.class);
+                    intent.putExtra("sceneText", currentScene.getText());
+                    intent.putExtra("nextSceneId", choice.getNextSceneId());
+                    break;
+                case "gloves":
+                    intent = new Intent(this, GlovesActivity.class);
+                    break;
+                case "find_book":
+                    intent = new Intent(this, FindBookActivity.class);
+                    intent.putExtra("nextSceneId", choice.getNextSceneId());
+                    break;
+                case "parol":
+                    intent = new Intent(this, ParolActivity.class);
+                    break;
+                case "diagram":
+                    intent = new Intent(this, DiagramActivity.class);
+                    break;
+                case "mirror":
+                    intent = new Intent(this, MirrorActivity.class);
+                    break;
+                case "picture_key":
+                    intent = new Intent(this, PicturesKeyActivity.class);
+                    break;
+                case "chasi":
+                    intent = new Intent(this, ChasiActivity.class);
+                    break;
+                default:
+                    Log.d("GameActivity", "Unknown miniGame: " + choice.getMiniGame());
+                    showScene(choice.getNextSceneId());
+                    return;
             }
+
             intent.putExtra("nextSceneId", choice.getNextSceneId());
             startActivityForResult(intent, 1);
         } else {
@@ -184,14 +210,11 @@ public class GameActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Log.d("GameActivity", "onActivityResult - requestCode: " + requestCode + ", resultCode: " + resultCode + ", data: " + data);
         if (requestCode == 1) {
             if (resultCode == RESULT_OK && data != null) {
                 String nextSceneId = data.getStringExtra("nextSceneId");
-                Log.d("GameActivity", "Next scene ID: " + nextSceneId);
                 showScene(nextSceneId);
             } else {
-                Log.d("GameActivity", "Game failed, showing surch_key_fail");
                 showScene("surch_key_fail");
             }
         }

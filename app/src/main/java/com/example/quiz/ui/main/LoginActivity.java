@@ -27,6 +27,9 @@ public class LoginActivity extends AppCompatActivity {
     private boolean isPasswordVisible = false;
     private boolean loggingIn = false;
 
+    private final String TEST_EMAIL = "individualproject2025@gmail.com";
+    private final String TEST_PASSWORD = "Samsung2025";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,17 +37,19 @@ public class LoginActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
-        // Views
         emailField = findViewById(R.id.login_email);
         passwordField = findViewById(R.id.login_password);
         loginButton = findViewById(R.id.login_button);
         loginTestUserText = findViewById(R.id.login_test_user);
         signupRedirect = findViewById(R.id.signupRedirectText);
 
-        // Проверка: если пользователь уже вошёл и подтвердил почту
         FirebaseUser currentUser = mAuth.getCurrentUser();
         boolean forceLogin = getIntent().getBooleanExtra("forceLogin", false);
-        if (currentUser != null && currentUser.isEmailVerified() && !forceLogin) {
+        if (currentUser != null &&
+                currentUser.isEmailVerified() &&
+                !forceLogin &&
+                (currentUser.getEmail() == null ||
+                        !currentUser.getEmail().equalsIgnoreCase(TEST_EMAIL))) {
             goToGame(currentUser);
         }
 
@@ -140,8 +145,17 @@ public class LoginActivity extends AppCompatActivity {
         if (loggingIn) return;
         loggingIn = true;
 
+        String enteredEmail = emailField.getText().toString().trim();
+        String enteredPassword = passwordField.getText().toString().trim();
+
         String testEmail = "individualproject2025@gmail.com";
         String testPassword = "Samsung2025";
+
+        if (!enteredEmail.equals(testEmail) || !enteredPassword.equals(testPassword)) {
+            Toast.makeText(this, "Введите правильные тестовые данные!", Toast.LENGTH_SHORT).show();
+            loggingIn = false;
+            return;
+        }
 
         if (!isNetworkAvailable()) {
             Toast.makeText(this, "Нет подключения к интернету", Toast.LENGTH_SHORT).show();
@@ -159,7 +173,7 @@ public class LoginActivity extends AppCompatActivity {
                             goToGame(user);
                         }
                     } else {
-                        Toast.makeText(this, "Ошибка тестового входа: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "Ошибка входа: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 })
                 .addOnFailureListener(e -> {
@@ -167,6 +181,7 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(this, "Ошибка сети: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 });
     }
+
 
     private void goToGame(FirebaseUser user) {
         Intent intent = new Intent(LoginActivity.this, StartWindowActivity.class);

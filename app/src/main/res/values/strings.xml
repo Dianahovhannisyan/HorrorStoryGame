@@ -1,5 +1,4 @@
 <resources>
-    <string name="app_name">Quiz</string>
     <string name="login_redirect">Already an user? Login</string>
     <string name="signup_redirect">Not yet registered? Sign Up</string>
     <string name="error_empty_email">Email cannot be empty</string>
@@ -22,4 +21,5 @@
     <string name="error_network">Network error: %1$s</string>
     <string name="test_email">individualproject2025@gmail.com</string>
     <string name="test_password">Samsung2025</string>
+    <string name="app_name">No Turning Back</string>
 </resources>
