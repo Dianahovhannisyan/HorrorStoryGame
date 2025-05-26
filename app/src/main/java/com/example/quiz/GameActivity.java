@@ -137,7 +137,9 @@ public class GameActivity extends AppCompatActivity {
             } else if ("find_book".equals(choice.getMiniGame())) {
             intent = new Intent(this, FindBookActivity.class);
             intent.putExtra("nextSceneId", choice.getNextSceneId());
-        } else {
+        } else if ("parol".equals(choice.getMiniGame())) {
+                intent = new Intent(this, ParolActivity.class);
+            } else {
                 Log.d("GameActivity", "Unknown miniGame: " + choice.getMiniGame());
                 showScene(choice.getNextSceneId());
                 return;
