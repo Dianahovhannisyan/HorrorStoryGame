@@ -13,6 +13,12 @@
         android:theme="@style/Theme.Quiz"
         tools:targetApi="31">
         <activity
+            android:name=".ChasiActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PicturesKeyActivity"
+            android:exported="false" />
+        <activity
             android:name=".MirrorActivity"
             android:exported="false" />
         <activity
