@@ -1,10 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".GameWin">
+    android:background="@drawable/startwindow">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:id="@+id/gameOverPanel"
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerInParent="true"
+        android:padding="40dp"
+        android:elevation="8dp"
+        android:layout_margin="16dp">
+
+        <TextView
+            android:id="@+id/gameOverText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:paddingBottom="24dp"
+            android:text="КОНЕЦ СЮЖЕТА"
+            android:fontFamily="sans-serif-black"
+            android:textStyle="italic"
+            android:textColor="#F5DEB3"
+            android:textSize="48sp" />
+
+        <TextView
+            android:id="@+id/gameOverMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:paddingBottom="32dp"
+            android:text="поздравляю с прохождением "
+            android:fontFamily="sans-serif-medium"
+            android:textSize="24sp"
+            android:textColor="#FFFFFF" />
+
+        <Button
+            android:id="@+id/retryButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="пройти друдие концовки"
+            android:textSize="20sp"
+            android:fontFamily="sans-serif-condensed"
+            android:textStyle="italic"
+            android:textColor="#F5DEB3"
+            android:background="@drawable/retry_button_background"
+            android:elevation="4dp"
+            android:layout_marginBottom="24dp" />
+
+        <TextView
+            android:id="@+id/quitText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Выйти из игры"
+            android:textSize="22sp"
+            android:textColor="#F5DEB3"
+            android:fontFamily="sans-serif"
+            android:textStyle="italic"
+            android:padding="8dp"
+            android:elevation="4dp" />
+    </LinearLayout>
+</RelativeLayout>
