@@ -36,7 +36,6 @@ public class StartWindowActivity extends AppCompatActivity {
         window_titleText2 = findViewById(R.id.window_titleText2);
 
         startButton = findViewById(R.id.windowstartButton);
-        settingsButton = findViewById(R.id.windowsettingsButton);
         rulesButton = findViewById(R.id.windowrulesButton);
         exitButton = findViewById(R.id.windowexitButton);
 

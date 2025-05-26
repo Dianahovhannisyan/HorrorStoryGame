@@ -32,13 +32,13 @@ public class GameLogic {
             JSONObject jsonObject = new JSONObject(json);
             JSONArray sceneArray = jsonObject.getJSONArray("scenes");
 
-
             for (int i = 0; i < sceneArray.length(); i++) {
                 JSONObject sceneObj = sceneArray.getJSONObject(i);
                 String id = sceneObj.getString("id");
                 String title = sceneObj.optString("title", "");
                 String text = sceneObj.getString("text");
                 boolean isGameOver = sceneObj.optBoolean("isGameOver", false);
+                boolean isGameWin = sceneObj.optBoolean("isGameWin", false);
 
                 List<Choice> choices = new ArrayList<>();
                 JSONArray choicesArray = sceneObj.getJSONArray("choices");
@@ -56,7 +56,7 @@ public class GameLogic {
                             (miniGame != null ? " [miniGame: " + miniGame + "]" : ""));
                 }
 
-                StoryScene scene = new StoryScene(id, title, text, isGameOver, choices);
+                StoryScene scene = new StoryScene(id, title, text, isGameOver, isGameWin, choices);
                 scenes.put(id, scene);
                 Log.d("GameLogic", "Scene loaded: " + id + " with " + choices.size() + " choices");
             }

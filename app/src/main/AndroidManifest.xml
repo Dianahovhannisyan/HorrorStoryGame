@@ -55,7 +55,7 @@
             android:name=".RulesKeyActivity"
             android:exported="false" />
         <activity
-            android:name=".GameWin"
+            android:name=".GameWinActivity"
             android:exported="false" />
         <activity
             android:name=".ui.main.SearchKeyActivity"

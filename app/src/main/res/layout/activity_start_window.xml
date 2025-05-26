@@ -54,16 +54,6 @@
         android:layout_marginBottom="20dp"/>
 
 
-    <Button
-        android:id="@+id/windowsettingsButton"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/rounded_button"
-        android:text="НАСТРОЙКИ"
-        android:drawableLeft="@drawable/settings"
-        android:textColor="#F8F8F8"
-        android:textSize="18sp"
-        android:layout_marginBottom="20dp"/>
 
 
     <Button

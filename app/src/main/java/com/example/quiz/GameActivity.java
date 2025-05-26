@@ -92,6 +92,28 @@ public class GameActivity extends AppCompatActivity {
                             .start())
                     .start();
             return;
+        } else if (currentScene.isGameWin()) {
+            tvText.setClickable(true);
+            tvText.setOnClickListener(v -> {
+                Intent intent = new Intent(GameActivity.this, GameWinActivity.class);
+                startActivity(intent);
+                finish();
+            });
+
+            tvText.setAlpha(0f);
+            tvText.animate()
+                    .alpha(1f)
+                    .setDuration(1000)
+                    .withEndAction(() -> tvText.animate()
+                            .alpha(0.5f)
+                            .setDuration(1000)
+                            .withEndAction(() -> tvText.animate()
+                                    .alpha(1f)
+                                    .setDuration(1000)
+                                    .start())
+                            .start())
+                    .start();
+            return;
         } else {
             tvText.setClickable(false);
             tvText.setOnClickListener(null);
@@ -135,20 +157,19 @@ public class GameActivity extends AppCompatActivity {
             } else if ("gloves".equals(choice.getMiniGame())) {
                 intent = new Intent(this, GlovesActivity.class);
             } else if ("find_book".equals(choice.getMiniGame())) {
-            intent = new Intent(this, FindBookActivity.class);
-            intent.putExtra("nextSceneId", choice.getNextSceneId());
-        } else if ("parol".equals(choice.getMiniGame())) {
+                intent = new Intent(this, FindBookActivity.class);
+                intent.putExtra("nextSceneId", choice.getNextSceneId());
+            } else if ("parol".equals(choice.getMiniGame())) {
                 intent = new Intent(this, ParolActivity.class);
             } else if ("diagram".equals(choice.getMiniGame())) {
                 intent = new Intent(this, DiagramActivity.class);
-            }else if ("mirror".equals(choice.getMiniGame())) {
+            } else if ("mirror".equals(choice.getMiniGame())) {
                 intent = new Intent(this, MirrorActivity.class);
-            }  else if ("picture_key".equals(choice.getMiniGame())) {
-            intent = new Intent(this, PicturesKeyActivity.class);
-            }else if ("chasi".equals(choice.getMiniGame())) {
+            } else if ("picture_key".equals(choice.getMiniGame())) {
+                intent = new Intent(this, PicturesKeyActivity.class);
+            } else if ("chasi".equals(choice.getMiniGame())) {
                 intent = new Intent(this, ChasiActivity.class);
-            }
-            else {
+            } else {
                 Log.d("GameActivity", "Unknown miniGame: " + choice.getMiniGame());
                 showScene(choice.getNextSceneId());
                 return;

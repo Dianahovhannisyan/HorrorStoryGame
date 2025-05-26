@@ -5,15 +5,9 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
-import com.example.quiz.ui.main.GameOverActivity;
-
-public class GameWin extends AppCompatActivity {
+public class GameWinActivity extends AppCompatActivity {
 
     Button retryButton;
     TextView quitText;
@@ -21,13 +15,13 @@ public class GameWin extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_game_over);
+        setContentView(R.layout.activity_game_win);
 
         retryButton = findViewById(R.id.retryButton);
         quitText = findViewById(R.id.quitText);
 
         retryButton.setOnClickListener(view -> {
-            Intent intent = new Intent(GameWin.this, GameActivity.class);
+            Intent intent = new Intent(GameWinActivity.this, GameActivity.class);
             startActivity(intent);
             finish();
         });
