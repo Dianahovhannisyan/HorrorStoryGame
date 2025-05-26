@@ -1,3 +1,25 @@
 <resources>
-    <string name="app_name">No Turning Back</string>
+    <string name="app_name">Quiz</string>
+    <string name="login_redirect">Already an user? Login</string>
+    <string name="signup_redirect">Not yet registered? Sign Up</string>
+    <string name="error_empty_email">Email cannot be empty</string>
+    <string name="error_invalid_email">Invalid email format</string>
+    <string name="error_empty_password">Password cannot be empty</string>
+    <string name="error_short_password">Password must be at least 6 characters</string>
+    <string name="error_empty_fields">Please fill all fields</string>
+    <string name="error_password_mismatch">Passwords do not match</string>
+    <string name="error_no_internet">No internet connection</string>
+    <string name="error_firebase_init">Firebase initialization error</string>
+    <string name="error_view_not_found">Error: Interface issue</string>
+    <string name="error_resource_not_found">Error: Resource not found</string>
+    <string name="success_login">Login successful</string>
+    <string name="success_test_login">Logged in as test user</string>
+    <string name="verify_email">Please verify your email</string>
+    <string name="error_login">Login error: %1$s</string>
+    <string name="error_test_login">Test login error: %1$s</string>
+    <string name="error_signup">Signup error: %1$s</string>
+    <string name="error_verification_email">Failed to send verification email: %1$s</string>
+    <string name="error_network">Network error: %1$s</string>
+    <string name="test_email">individualproject2025@gmail.com</string>
+    <string name="test_password">Samsung2025</string>
 </resources>

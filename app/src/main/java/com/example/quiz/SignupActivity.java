@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.MotionEvent;
-import android.view.View;
 import android.widget.*;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -42,8 +41,12 @@ public class SignupActivity extends AppCompatActivity {
         signupButton.setOnClickListener(v -> registerUser());
 
         TextView loginRedirectText = findViewById(R.id.loginRedirectText);
-        loginRedirectText.setOnClickListener(view ->
-                startActivity(new Intent(SignupActivity.this, LoginActivity.class)));
+        loginRedirectText.setOnClickListener(view -> {
+            Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
+            intent.putExtra("forceLogin", true); // чтобы LoginActivity не запускал auto-login
+            startActivity(intent);
+            finish();
+        });
 
         setupPasswordVisibilityToggle(passwordField, true);
         setupPasswordVisibilityToggle(confirmPasswordField, false);
@@ -59,13 +62,11 @@ public class SignupActivity extends AppCompatActivity {
                     boolean isVisible = isMainPasswordField ? isPasswordVisible : isConfirmPasswordVisible;
                     isVisible = !isVisible;
 
-                    // Изменяем inputType
                     editText.setInputType(isVisible
                             ? InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
                             : InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
 
-                    editText.setSelection(editText.getText().length()); // Курсор в конец
-
+                    editText.setSelection(editText.getText().length());
 
                     editText.setCompoundDrawablesWithIntrinsicBounds(
                             editText.getCompoundDrawables()[0], null,
@@ -108,11 +109,13 @@ public class SignupActivity extends AppCompatActivity {
                 if (user != null) {
                     user.sendEmailVerification().addOnCompleteListener(verifyTask -> {
                         if (verifyTask.isSuccessful()) {
-                            HelperClass helper = new HelperClass(email, username, password);
+                            HelperClass helper = new HelperClass(email, username);
                             database.child(user.getUid()).setValue(helper);
                             Toast.makeText(this, "Подтвердите email. Проверьте почту", Toast.LENGTH_LONG).show();
-                            mAuth.signOut();
-                            startActivity(new Intent(SignupActivity.this, LoginActivity.class));
+                            mAuth.signOut(); // Обязательно разлогинить
+                            Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
+                            intent.putExtra("forceLogin", true);
+                            startActivity(intent);
                             finish();
                         }
                     });
