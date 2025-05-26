@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#121212"
+    android:padding="16dp">
+
+    <!-- Картинка сверху -->
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="386dp"
+        android:layout_weight="1"
+        android:scaleType="fitCenter"
+        android:src="@drawable/mirror" />
+
+    <!-- Кнопки с вариантами ответов -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="16dp"
+        android:weightSum="2">
+
+        <Button
+            android:id="@+id/option1"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="🔹 W3B8"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#333333" />
+
+        <Button
+            android:id="@+id/option2"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="🔸 3L8W"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#333333"
+            android:layout_marginStart="8dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="8dp"
+        android:weightSum="2">
+
+        <Button
+            android:id="@+id/option3"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="🔹 E8M3"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#333333" />
+
+        <Button
+            android:id="@+id/option4"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="🔸 W8E3"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#333333"
+            android:layout_marginStart="8dp" />
+    </LinearLayout>
+
+</LinearLayout>

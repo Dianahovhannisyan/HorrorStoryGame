@@ -141,6 +141,8 @@ public class GameActivity extends AppCompatActivity {
                 intent = new Intent(this, ParolActivity.class);
             } else if ("diagram".equals(choice.getMiniGame())) {
                 intent = new Intent(this, DiagramActivity.class);
+            }else if ("mirror".equals(choice.getMiniGame())) {
+                intent = new Intent(this, MirrorActivity.class);
             }
             else {
                 Log.d("GameActivity", "Unknown miniGame: " + choice.getMiniGame());
