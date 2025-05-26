@@ -6,7 +6,15 @@
     android:background="#121212"
     android:padding="16dp">
 
-    <!-- Картинка сверху -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Угадай изначальную цифру"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="16dp" />
+
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
@@ -15,7 +23,6 @@
         android:scaleType="fitCenter"
         android:src="@drawable/mirror" />
 
-    <!-- Кнопки с вариантами ответов -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
