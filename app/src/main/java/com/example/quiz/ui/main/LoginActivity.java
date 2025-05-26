@@ -33,25 +33,25 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
 
         mAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        boolean forceLogin = getIntent().getBooleanExtra("forceLogin", false);
 
+        // ✅ Автоматический вход, если пользователь уже в системе
+        if (currentUser != null && currentUser.isEmailVerified() && !forceLogin) {
+            goToGame(currentUser);
+            return;
+        }
+
+        setContentView(R.layout.activity_login);
+
+        // Привязка элементов
         emailField = findViewById(R.id.login_email);
         passwordField = findViewById(R.id.login_password);
         loginButton = findViewById(R.id.login_button);
         loginTestUserText = findViewById(R.id.login_test_user);
         signupRedirect = findViewById(R.id.signupRedirectText);
-
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        boolean forceLogin = getIntent().getBooleanExtra("forceLogin", false);
-        if (currentUser != null &&
-                currentUser.isEmailVerified() &&
-                !forceLogin &&
-                (currentUser.getEmail() == null ||
-                        !currentUser.getEmail().equalsIgnoreCase(TEST_EMAIL))) {
-            goToGame(currentUser);
-        }
 
         loginButton.setOnClickListener(view -> loginUser());
         loginTestUserText.setOnClickListener(view -> loginAsTestUser());
@@ -148,10 +148,7 @@ public class LoginActivity extends AppCompatActivity {
         String enteredEmail = emailField.getText().toString().trim();
         String enteredPassword = passwordField.getText().toString().trim();
 
-        String testEmail = "individualproject2025@gmail.com";
-        String testPassword = "Samsung2025";
-
-        if (!enteredEmail.equals(testEmail) || !enteredPassword.equals(testPassword)) {
+        if (!enteredEmail.equals(TEST_EMAIL) || !enteredPassword.equals(TEST_PASSWORD)) {
             Toast.makeText(this, "Введите правильные тестовые данные!", Toast.LENGTH_SHORT).show();
             loggingIn = false;
             return;
@@ -163,7 +160,7 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
-        mAuth.signInWithEmailAndPassword(testEmail, testPassword)
+        mAuth.signInWithEmailAndPassword(TEST_EMAIL, TEST_PASSWORD)
                 .addOnCompleteListener(task -> {
                     loggingIn = false;
                     if (task.isSuccessful()) {
@@ -181,7 +178,6 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(this, "Ошибка сети: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 });
     }
-
 
     private void goToGame(FirebaseUser user) {
         Intent intent = new Intent(LoginActivity.this, StartWindowActivity.class);

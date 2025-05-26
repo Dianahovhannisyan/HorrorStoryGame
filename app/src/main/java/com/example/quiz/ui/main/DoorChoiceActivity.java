@@ -20,7 +20,6 @@ public class DoorChoiceActivity extends AppCompatActivity {
     private long startTime;
     private String nextSceneId;
 
-    // private MediaPlayer mediaPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,11 +58,6 @@ public class DoorChoiceActivity extends AppCompatActivity {
         handler.removeCallbacks(timerRunnable);
 
 
-        // if (mediaPlayer != null) {
-        //     mediaPlayer.stop();
-        //     mediaPlayer.release();
-        // }
-
         Intent resultIntent = new Intent();
         resultIntent.putExtra("nextSceneId", door);
         setResult(RESULT_OK, resultIntent);
@@ -74,10 +68,6 @@ public class DoorChoiceActivity extends AppCompatActivity {
         handler.removeCallbacks(timerRunnable);
 
 
-        // if (mediaPlayer != null) {
-        //     mediaPlayer.stop();
-        //     mediaPlayer.release();
-        // }
 
         Intent intent = new Intent(this, GameOverActivity.class);
         intent.putExtra("nextSceneId", "surch_key_fail");
@@ -91,9 +81,5 @@ public class DoorChoiceActivity extends AppCompatActivity {
         handler.removeCallbacks(timerRunnable);
 
 
-        // if (mediaPlayer != null) {
-        //     mediaPlayer.stop();
-        //     mediaPlayer.release();
-        // }
     }
 }
