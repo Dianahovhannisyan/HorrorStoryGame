@@ -65,7 +65,6 @@ public class StartWindowActivity extends AppCompatActivity {
 
         loadStats();
 
-        // Убедимся, что кнопка всегда активна
         startButton.setOnClickListener(v -> {
             FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
             if (currentUser != null) {
@@ -81,7 +80,7 @@ public class StartWindowActivity extends AppCompatActivity {
                     }
                 }).addOnFailureListener(e -> {
                     Toast.makeText(this, "Ошибка загрузки прогресса, начинаем заново", Toast.LENGTH_SHORT).show();
-                    startGame("start"); // Гарантированный старт при ошибке
+                    startGame("start");
                 });
             } else {
                 startGame("start");
