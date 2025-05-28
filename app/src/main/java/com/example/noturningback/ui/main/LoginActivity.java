@@ -38,7 +38,6 @@ public class LoginActivity extends AppCompatActivity {
         FirebaseUser currentUser = mAuth.getCurrentUser();
         boolean forceLogin = getIntent().getBooleanExtra("forceLogin", false);
 
-        // ✅ Автоматический вход, если пользователь уже в системе
         if (currentUser != null && currentUser.isEmailVerified() && !forceLogin) {
             goToGame(currentUser);
             return;
@@ -46,7 +45,6 @@ public class LoginActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_login);
 
-        // Привязка элементов
         emailField = findViewById(R.id.login_email);
         passwordField = findViewById(R.id.login_password);
         loginButton = findViewById(R.id.login_button);

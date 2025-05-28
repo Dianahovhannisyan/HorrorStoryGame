@@ -65,13 +65,13 @@ public class StartWindowActivity extends AppCompatActivity {
 
         loadStats();
 
+        // Убедимся, что кнопка всегда активна
         startButton.setOnClickListener(v -> {
             FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
             if (currentUser != null) {
                 DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users")
                         .child(currentUser.getUid())
                         .child("currentSceneId");
-
                 ref.get().addOnSuccessListener(dataSnapshot -> {
                     String savedScene = dataSnapshot.getValue(String.class);
                     if (savedScene != null && !savedScene.equals("start")) {
@@ -80,8 +80,8 @@ public class StartWindowActivity extends AppCompatActivity {
                         startGame("start");
                     }
                 }).addOnFailureListener(e -> {
-                    Toast.makeText(this, "Ошибка загрузки прогресса", Toast.LENGTH_SHORT).show();
-                    startGame("start");
+                    Toast.makeText(this, "Ошибка загрузки прогресса, начинаем заново", Toast.LENGTH_SHORT).show();
+                    startGame("start"); // Гарантированный старт при ошибке
                 });
             } else {
                 startGame("start");

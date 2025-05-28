@@ -43,7 +43,7 @@ public class SignupActivity extends AppCompatActivity {
         TextView loginRedirectText = findViewById(R.id.loginRedirectText);
         loginRedirectText.setOnClickListener(view -> {
             Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
-            intent.putExtra("forceLogin", true); // чтобы LoginActivity не запускал auto-login
+            intent.putExtra("forceLogin", true);
             startActivity(intent);
             finish();
         });
