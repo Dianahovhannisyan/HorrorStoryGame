@@ -1,22 +1,21 @@
 {
   "project_info": {
-    "project_number": "328458954795",
-    "firebase_url": "https://horrorgame-4dd70-default-rtdb.firebaseio.com",
-    "project_id": "horrorgame-4dd70",
-    "storage_bucket": "horrorgame-4dd70.firebasestorage.app"
+    "project_number": "295998494261",
+    "project_id": "noturningback-c4045",
+    "storage_bucket": "noturningback-c4045.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:328458954795:android:4adf192d67d9360f62e26e",
+        "mobilesdk_app_id": "1:295998494261:android:b046403b88127b9911c37c",
         "android_client_info": {
-          "package_name": "com.example.quiz"
+          "package_name": "com.example.noturningback"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAx09envZFcgQVhmsfz4b7czPwWMi4oQc8"
+          "current_key": "AIzaSyBk3TKPmOSp1gg6KjU7g4ZFon7VvFeruLw"
         }
       ],
       "services": {

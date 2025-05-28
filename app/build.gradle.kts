@@ -8,11 +8,11 @@ plugins {
 
 
 android {
-    namespace = "com.example.quiz"
+    namespace = "com.example.noturningback"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.example.quiz"
+        applicationId = "com.example.noturningback"
         minSdk = 24
         targetSdk = 35
         versionCode = 1
