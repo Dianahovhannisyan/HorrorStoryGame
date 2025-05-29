@@ -6,12 +6,14 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.text.InputType;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.MotionEvent;
 import android.widget.*;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.noturningback.MainActivity;
 import com.example.noturningback.R;
 import com.example.noturningback.SignupActivity;
 import com.google.firebase.auth.FirebaseAuth;
@@ -52,7 +54,7 @@ public class LoginActivity extends AppCompatActivity {
         signupRedirect = findViewById(R.id.signupRedirectText);
 
         loginButton.setOnClickListener(view -> loginUser());
-        loginTestUserText.setOnClickListener(view -> loginAsTestUser());
+        loginTestUserText.setOnClickListener(view -> signInTestUser());
         signupRedirect.setOnClickListener(view -> {
             Intent intent = new Intent(LoginActivity.this, SignupActivity.class);
             intent.putExtra("forceLogin", true);
@@ -139,42 +141,84 @@ public class LoginActivity extends AppCompatActivity {
                 });
     }
 
-    private void loginAsTestUser() {
+//    private void loginAsTestUser() {
+//        if (loggingIn) return;
+//        loggingIn = true;
+//
+//        String enteredEmail = emailField.getText().toString().trim();
+//        String enteredPassword = passwordField.getText().toString().trim();
+//
+//        if (!enteredEmail.equals(TEST_EMAIL) || !enteredPassword.equals(TEST_PASSWORD)) {
+//            Toast.makeText(this, "Введите правильные тестовые данные!", Toast.LENGTH_SHORT).show();
+//            loggingIn = false;
+//            return;
+//        }
+//
+//        if (!isNetworkAvailable()) {
+//            Toast.makeText(this, "Нет подключения к интернету", Toast.LENGTH_SHORT).show();
+//            loggingIn = false;
+//            return;
+//        }
+//
+//        mAuth.signInWithEmailAndPassword(TEST_EMAIL, TEST_PASSWORD)
+//                .addOnCompleteListener(task -> {
+//                    loggingIn = false;
+//                    if (task.isSuccessful()) {
+//                        FirebaseUser user = mAuth.getCurrentUser();
+//                        if (user != null) {
+//                            Toast.makeText(this, "Вход как тестовый пользователь", Toast.LENGTH_SHORT).show();
+//                            goToGame(user);
+//                        }
+//                    } else {
+//                        Toast.makeText(this, "Ошибка входа: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+//                    }
+//                })
+//                .addOnFailureListener(e -> {
+//                    loggingIn = false;
+//                    Toast.makeText(this, "Ошибка сети: " + e.getMess), Toast.LENGTH_SHORT).show();
+//                });
+//    }
+
+    private void signInTestUser() {
+        String testEmail = "individualproject2025@gmail.com";
+        String testPassword = "Samsung2025";
         if (loggingIn) return;
         loggingIn = true;
 
-        String enteredEmail = emailField.getText().toString().trim();
-        String enteredPassword = passwordField.getText().toString().trim();
-
-        if (!enteredEmail.equals(TEST_EMAIL) || !enteredPassword.equals(TEST_PASSWORD)) {
-            Toast.makeText(this, "Введите правильные тестовые данные!", Toast.LENGTH_SHORT).show();
-            loggingIn = false;
-            return;
-        }
-
-        if (!isNetworkAvailable()) {
-            Toast.makeText(this, "Нет подключения к интернету", Toast.LENGTH_SHORT).show();
-            loggingIn = false;
-            return;
-        }
-
-        mAuth.signInWithEmailAndPassword(TEST_EMAIL, TEST_PASSWORD)
+        mAuth.signInWithEmailAndPassword(testEmail, testPassword)
                 .addOnCompleteListener(task -> {
                     loggingIn = false;
                     if (task.isSuccessful()) {
                         FirebaseUser user = mAuth.getCurrentUser();
-                        if (user != null) {
-                            Toast.makeText(this, "Вход как тестовый пользователь", Toast.LENGTH_SHORT).show();
+                        if (user != null ) {
+                            Toast.makeText(this, "Успешный вход", Toast.LENGTH_SHORT).show();
                             goToGame(user);
                         }
                     } else {
-                        Toast.makeText(this, "Ошибка входа: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "Ошибка: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 })
                 .addOnFailureListener(e -> {
                     loggingIn = false;
                     Toast.makeText(this, "Ошибка сети: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 });
+//        mAuth.signInWithEmailAndPassword(testEmail, testPassword)
+//                .addOnCompleteListener(this, task -> {
+//                    if (task.isSuccessful()) {
+//                        FirebaseUser user = mAuth.getCurrentUser();
+//                        if (user != null) {
+//                            Toast.makeText(LoginActivity.this, "Test user login successful", Toast.LENGTH_SHORT).show();
+//
+//
+//                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+//                            startActivity(intent);
+//                            finish();
+//                        }
+//                    } else {
+//                        Toast.makeText(LoginActivity.this, "Test user login failed: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
+//                        Log.e("FirebaseAuth", "Test login failed", task.getException());
+//                    }
+//                });
     }
 
     private void goToGame(FirebaseUser user) {
