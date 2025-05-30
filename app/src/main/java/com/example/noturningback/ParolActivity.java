@@ -3,7 +3,6 @@ package com.example.noturningback;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -11,11 +10,13 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class ParolActivity extends AppCompatActivity {
+
     private ImageView imageView;
     private EditText passwordInput;
-    private TextView errorMessage;
+    private TextView errorMessage, passwordTitle, enterButton;
+    private View passwordFrame;
     private String nextSceneId;
-    private boolean showingSecondImage = false;
+    private boolean firstClick = true;
     private final String CORRECT_PASSWORD = "5689";
 
     @Override
@@ -26,35 +27,33 @@ public class ParolActivity extends AppCompatActivity {
         imageView = findViewById(R.id.imageView);
         passwordInput = findViewById(R.id.passwordInput);
         errorMessage = findViewById(R.id.errorMessage);
+        passwordTitle = findViewById(R.id.passwordTitle);
+        passwordFrame = findViewById(R.id.passwordFrame);
+        enterButton = findViewById(R.id.enterButton);
 
         nextSceneId = getIntent().getStringExtra("nextSceneId");
         Log.d("ParolActivity", "Received nextSceneId: " + nextSceneId);
 
-        imageView.setImageResource(R.drawable.komp);
+        imageView.setVisibility(View.VISIBLE);
+        passwordInput.setVisibility(View.INVISIBLE);
+        passwordTitle.setVisibility(View.INVISIBLE);
+        passwordFrame.setVisibility(View.INVISIBLE);
+        enterButton.setVisibility(View.INVISIBLE);
+        errorMessage.setVisibility(View.INVISIBLE);
 
         imageView.setOnClickListener(v -> {
-            if (!showingSecondImage) {
-                imageView.setImageResource(R.drawable.parol2);
+            if (firstClick) {
+                firstClick = false;
+                imageView.setVisibility(View.GONE);
+
                 passwordInput.setVisibility(View.VISIBLE);
-                showingSecondImage = true;
+                passwordTitle.setVisibility(View.VISIBLE);
+                passwordFrame.setVisibility(View.VISIBLE);
+                enterButton.setVisibility(View.VISIBLE);
             }
         });
 
-        imageView.setOnTouchListener((v, event) -> {
-            if (event.getAction() == MotionEvent.ACTION_DOWN && showingSecondImage) {
-                // Проверяем, попал ли клик в область кнопки "ENTER"
-                float x = event.getX();
-                float y = event.getY();
-                int[] location = new int[2];
-                imageView.getLocationOnScreen(location);
-                int imageHeight = imageView.getHeight();
-                int imageWidth = imageView.getWidth();
-                if (y > imageHeight * 0.85 && y < imageHeight && x > imageWidth * 0.4 && x < imageWidth * 0.6) {
-                    checkPassword();
-                }
-            }
-            return false;
-        });
+        enterButton.setOnClickListener(v -> checkPassword());
     }
 
     private void checkPassword() {
