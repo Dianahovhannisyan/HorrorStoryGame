@@ -11,7 +11,7 @@ import com.example.noturningback.ui.main.GameOverActivity;
 public class MirrorActivity extends AppCompatActivity {
     private Button option1, option2, option3, option4;
     private String nextSceneId;
-    private final String CORRECT_ANSWER = "3L8W";
+    private final String CORRECT_ANSWER = "W8E3";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

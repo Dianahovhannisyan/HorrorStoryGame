@@ -43,7 +43,7 @@
             android:id="@+id/retryButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="пройти друдие концовки"
+            android:text="пройти другие концовки"
             android:textSize="20sp"
             android:fontFamily="sans-serif-condensed"
             android:textStyle="italic"
